@@ -1,7 +1,7 @@
 {
     "name": "Rental Menegment System",
     "version": "17.0.0.0.1",
-    "category": "Services",
+    "category": "Administration",
     "license": "AGPL-3",
     "author": "Ostwind Software",
     "website": "https://ostwind.i2base.com",
@@ -16,4 +16,5 @@
 #        "web.assets_tests": ["contract/static/src/js/contract_portal_tour.esm.js"],
     },
     "installable": True,
+    'application': True,
 }
