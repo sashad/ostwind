@@ -1,10 +1,10 @@
 {
     "name": "Rental Menegment System",
     "version": "17.0.0.0.1",
-    "category": "Administration",
+    "category": "Managment",
     "license": "AGPL-3",
     "author": "Ostwind Software",
-    "website": "https://ostwind.i2base.com",
+    "website": "https://idc-ostwind-gmbh.odoo.com/",
     "depends": ["base", "account", "product", "portal"],
     "development_status": "Development/Unstable",
     "data": [
