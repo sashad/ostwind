@@ -10,25 +10,57 @@ class RentObject(models.Model):
     # Main
     name = fields.Char('Prop Name', required=True, translate=True)
     addr_street = fields.Char('Street', required=False, translate=True)
-    house = fields.Char('House', required=False, translate=False)
-    zip = fields.Char('Zip', required=False, translate=False)
-    city = fields.Char('City', required=False, translate=False)
-    country = fields.many2one() # link to vocab country
+    addr_house = fields.Char('House', required=False, translate=False)
+    addr_zip = fields.Char('Zip', required=False, translate=False)
+    addr_city = fields.Char('City', required=False, translate=True)
+    addr_country_id = fields.many2one('res.country', 'Country', readonly=True) # link to vocab country
     # General
-    # @property
-    type_of_property = fields.select(['']) # Rental property, Comertial property, residentiol complex, condominimum association, misc.
-    date_build = fields.Date('Build year', required=False, translate=False)
+    property_type =  fields.Selection(
+        string='Type of property',
+        selection=[
+            ('r', 'Rental property'),
+            ('c', 'Comercial property'),
+            ('rc', 'Residential complex'),
+            ('ca', 'Condominium association'),
+            ('m', 'Misc')
+        ],
+        help=""
+    )
+    date_build = fields.Date('Build year', required=False)
     plot_number = fields.Char('Plot number', required=False, translate=False)
     cadastral_municipality = fields.Char('Cadastral municipality', required=False, translate=False)
     entry_number = fields.Char('Entry number', required=False, translate=False)
     coownership = fields.Integer('Co-ownership', required=False)
     # Heating value
     hiating_requirement = fields.Float('Heating requirement', required=False)
-    hiating_type = fields.select(['']) # central, floor type, partial central heating, gas floor heating.
-    energy_source = fields.select(['']) # geothermal energy, district heating, gas, heating oil, wood, pellets, photo voltaic, electricity, heating pump.
+    hiating_type = fields.Selection(
+        string='Heating type',
+        selection=[
+            ('c', 'Central'),
+            ('f', 'Floor type'),
+            ('pch', 'Partial central heating'),
+            ('gfh', 'Gas floor heating'),
+        ],
+        help=""
+    )
+    energy_source = fields.Selection(
+        string='Energy source',
+        selection=[
+            ('gth', 'Geothermal energy'),
+            ('dh', 'District heating'),
+            ('gas', 'Gas'),
+            ('ho', 'Heating oil'),
+            ('w', 'Wood'),
+            ('p', 'Pellets'),
+            ('phv', 'Photo voltaic'),
+            ('e', 'Electricity'),
+            ('hp', 'Heating pump'),
+        ],
+        help=""
+    )
     energy_certificate = fields.Boolean('Energy certificate')
     energy_certificate_file = fields.Binary(string = 'Energy certificate file')
-    billing_company = fields.many2one('Billing company', 'partners')
+    billing_company = fields.many2one('res.company', 'Billing company', readonly=True)
     heating_type_comment = fields.Char('Heating type comment', required=False, translate=False)
     living_space = fields.Float('Living space', required=False)
     usefull_value = fields.Float('Usefull value', required=False)
