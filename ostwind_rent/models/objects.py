@@ -69,9 +69,8 @@ class RentObject(models.Model):
     basic_cost_share = fields.Integer('Basic cost share', required=False)
     # Units/Flats
 
-    # number_of_months = fields.Integer('# Months', required=True)
     active = fields.Boolean('Active', default=True)
-    sequence = fields.Integer('Sequence', default=10)
+    sequence = fields.Integer('Sequence', default=1000)
 
     # _sql_constraints = [
     #    ('check_number_of_months', 'CHECK(number_of_months >= 0)', 'The number of month can\'t be negative.'),
