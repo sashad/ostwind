@@ -62,11 +62,11 @@ class RentObject(models.Model):
     energy_certificate_file = fields.Binary(string = 'Energy certificate file')
     billing_company = fields.many2one('res.company', 'Billing company', readonly=True)
     heating_type_comment = fields.Char('Heating type comment', required=False, translate=False)
-    living_space = fields.Float('Living space', required=False)
-    usefull_value = fields.Float('Usefull value', required=False)
-    heatable_space = fields.Float('Heatable space', required=False)
-    consumption_cost_share = fields.Integer('Consumption cost share', required=False)
-    basic_cost_share = fields.Integer('Basic cost share', required=False)
+    utility_value = fields.Float('Utility value', required=False)
+    net_floor_area = fields.Float('Net Floor Area (NFA)', required=False)
+    heated_living_aria = fields.Float('Heated living aria', required=False)
+    variable_cost_share = fields.Integer('Variable cost share', required=False)
+    fixed_cost_share = fields.Integer('Fixed cost share', required=False)
     # Units/Flats
 
     active = fields.Boolean('Active', default=True)
@@ -82,14 +82,14 @@ class RentObjectUnit(models.Model):
 
     rent_object_id = fields.many2one('ostwind.rent.object') # link to rent object.
     name = fields.Char('Unit Name', required=True, translate=True)
-    tenant = fields.many2one('res.partners') # Жилец, арендатор.
+    tenant = fields.many2one('res.partners', 'Tenant') # Жилец, арендатор.
 
 class RentObjectUnitOwners(models.Model):
     _name = "ostwind.rent.object.unit.owner"
     _description = "Owners of Units/flats of an rent object."
 
-    rent_object_unit_id = fields.many2one('ostwind.rent.object.unit')
+    rent_object_unit_id = fields.many2one('ostwind.rent.object.unit', 'Unit')
     description = fields.Char('Unit Name', required=True)
-    owner_partner_id = fields.many2one('res.partners')
+    owner_partner_id = fields.many2one('res.partners', 'Owner')
     part = fields.Float('Part', required=False)
 
