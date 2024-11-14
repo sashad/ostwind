@@ -84,6 +84,8 @@ class RentObjectUnit(models.Model):
 
     rent_object_id = fields.many2one('ostwind.rent.object')
     name = fields.Char('Unit Name', required=True, translate=True)
+    value = fields.Float('value', required=False)
+
     tenant = fields.many2one('res.partners', 'Tenant')
 
 
