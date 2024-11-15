@@ -11,7 +11,7 @@ class RentObject(models.Model):
     addr_house = fields.Char('House', required=False, translate=False)
     addr_zip = fields.Char('Zip', required=False, translate=False)
     addr_city = fields.Char('City', required=False, translate=True)
-    addr_country_id = fields.many2one('res.country', 'Country', readonly=True)
+    addr_country_id = fields.Many2one('res.country', 'Country', readonly=True)
     # General
     property_type =  fields.Selection(
         string='Type of property',
@@ -62,7 +62,7 @@ class RentObject(models.Model):
     )
     energy_certificate = fields.Boolean('Energy certificate')
     energy_certificate_file = fields.Binary(string = 'Energy certificate file')
-    billing_company = fields.many2one('res.company', 'Billing company', readonly=True)
+    billing_company = fields.Many2one('res.company', 'Billing company', readonly=True)
     heating_type_comment = fields.Char(
         'Heating type comment',
         required=False,
@@ -90,19 +90,19 @@ class RentObjectUnit(models.Model):
     _name = "ostwind.rent.object.unit"
     _description = "Units/flats of an rent object."
 
-    rent_object_id = fields.many2one('ostwind.rent.object')
+    rent_object_id = fields.Many2one('ostwind.rent.object')
     name = fields.Char('Unit Name', required=True, translate=True)
     value = fields.Float('value', required=False)
 
-    tenant = fields.many2one('res.partners', 'Tenant')
+    tenant = fields.Many2one('res.partners', 'Tenant')
 
 
 class RentObjectUnitOwners(models.Model):
     _name = "ostwind.rent.object.unit.owner"
     _description = "Owners of Units/flats of a rent object."
 
-    rent_object_unit_id = fields.many2one('ostwind.rent.object.unit', 'Unit')
+    rent_object_unit_id = fields.Many2one('ostwind.rent.object.unit', 'Unit')
     description = fields.Char('Unit Name', required=True)
-    owner_partner_id = fields.many2one('res.partners', 'Owner')
+    owner_partner_id = fields.Many2one('res.partners', 'Owner')
     part = fields.Float('Part', required=False)
 
