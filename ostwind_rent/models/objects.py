@@ -26,7 +26,11 @@ class RentObject(models.Model):
     )
     date_build = fields.Date('Build year', required=False)
     plot_number = fields.Char('Plot number', required=False, translate=False)
-    cadastral_municipality = fields.Char('Cadastral municipality', required=False, translate=False)
+    cadastral_municipality = fields.Char(
+        'Cadastral municipality',
+        required=False,
+        translate=False
+    )
     entry_number = fields.Char('Entry number', required=False, translate=False)
     coownership = fields.Integer('Co-ownership', required=False)
     # Heating value
@@ -59,7 +63,11 @@ class RentObject(models.Model):
     energy_certificate = fields.Boolean('Energy certificate')
     energy_certificate_file = fields.Binary(string = 'Energy certificate file')
     billing_company = fields.many2one('res.company', 'Billing company', readonly=True)
-    heating_type_comment = fields.Char('Heating type comment', required=False, translate=False)
+    heating_type_comment = fields.Char(
+        'Heating type comment',
+        required=False,
+        translate=False
+    )
     utility_value = fields.Float(
         'Utility value',
         required=False,
