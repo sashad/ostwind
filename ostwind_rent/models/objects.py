@@ -52,10 +52,10 @@ class RentObject(models.Model):
             ('dh', 'District heating'),
             ('gas', 'Gas'),
             ('ho', 'Heating oil'),
-            ('w', 'Wood'),
-            ('p', 'Pellets'),
+            ('wd', 'Wood'),
+            ('plt', 'Pellets'),
             ('phv', 'Photo voltaic'),
-            ('e', 'Electricity'),
+            ('elc', 'Electricity'),
             ('hp', 'Heating pump'),
         ],
         help=""
