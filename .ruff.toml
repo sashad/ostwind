@@ -28,3 +28,4 @@ section-order = ["future", "standard-library", "third-party", "odoo", "odoo-addo
 
 [mccabe]
 max-complexity = 16
+
