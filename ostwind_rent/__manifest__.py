@@ -10,8 +10,8 @@
     "data": [
         'security/rent_security.xml',
         'security/ir.model.access.csv',
+        "views/rent_object_views.xml",
         # "data/contract_cron.xml",
-        # "views/contract_portal_templates.xml",
     ],
     "assets": {
         # "web.assets_frontend": ["contract/static/src/scss/frontend.scss"],

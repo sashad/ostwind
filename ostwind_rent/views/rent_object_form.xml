@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="ostwind_rent_object_form_view">
+        <xpath expr="//field[@name='name']" position="attributes">
+            <attribute name="string">Property</attribute>
+        </xpath>
+        <xpath expr="//group[@name='studio_group_d2e547_left']" position="inside">
+            <field name="address_street"/>
+            <field name="address_house"/>
+            <field name="address_zip"/>
+            <field name="address_city"/>
+            <field name="address_country"/>
+        </xpath>
+        <xpath expr="//group[@name='studio_group_d2e547']" position="after">
+            <notebook name="studio_notebook_837_1ibu4295p">
+              <page string="General" name="studio_page_837">
+                <group name="studio_group_837">
+                  <group name="studio_group_837_left" string="Property">
+                    <field name="x_studio_type_of_property"/>
+                    <field name="x_studio_year" placeholder="1990" string="Year of construction"/>
+                    <field name="x_studio_plot_number"/>
+                    <field name="x_studio_cadastral_municipality"/>
+                    <field name="x_studio_entry_number"/>
+                  </group>
+                  <group name="studio_group_837_right" string="Co-ownership">
+                    <field name="x_studio_simple_co_ownership_shares_1"/>
+                  </group>
+                </group>
+              </page>
+              <page string="Units" name="studio_page_600_1ibu454aa">
+                <group name="studio_group_600">
+                  <group name="studio_group_600_left">
+                    <field name="x_studio_beschreibung" string="Description" placeholder="Units assigned to the property"/>
+                    <field name="x_studio_one2many_property_units" string="Units"/>
+                  </group>
+                  <group name="studio_group_600_right"/>
+                </group>
+              </page>
+              <page string="Heating/Value" name="studio_page_5rn_1ibu5h9ff">
+                <group name="studio_group_5rn">
+                  <group name="studio_group_5rn_left">
+                    <field name="x_studio_heating_requirement"/>
+                    <field name="x_studio_heating_type"/>
+                    <field name="x_studio_energy_source"/>
+                    <field name="x_studio_energy_sertificate" string="Energy certificate"/>
+                    <field widget="file" filename="x_studio_ea_filename" name="x_studio_ea"/>
+                    <field name="x_studio_billing_company"/>
+                    <field name="x_studio_heating_type_comment" string="Heating type comments"/>
+                    <field widget="file" invisible="True" name="x_studio_ea_filename"/>
+                  </group>
+                  <group name="studio_group_5rn_right">
+                    <field name="x_studio_living_space" string="utility value" help="value according to land register" options="{&quot;human_readable&quot;:false,&quot;type&quot;:&quot;m2&quot;}"/>
+                    <field name="x_studio_usefull_value" string="Net Floor Area (NFA)"/>
+                    <field name="x_studio_heatable_space" string="heated living area" help="Area or space that can be heated"/>
+                    <field name="x_studio_reducable_cost_share" string="variable cost share"/>
+                    <field name="x_studio_basic_cost_share" string="fixed cost share"/>
+                  </group>
+                </group>
+              </page>
+            </notebook>
+        </xpath>
+    </record>
+</odoo>
