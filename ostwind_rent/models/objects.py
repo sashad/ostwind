@@ -94,7 +94,7 @@ class RentObjectUnit(models.Model):
     name = fields.Char('Unit Name', required=True, translate=True)
     value = fields.Float('value', required=False)
 
-    tenant = fields.Many2one('res.partners', 'Tenant')
+    tenant = fields.Many2one('res.partner', 'Tenant')
 
 
 class RentObjectUnitOwners(models.Model):
@@ -103,6 +103,6 @@ class RentObjectUnitOwners(models.Model):
 
     rent_object_unit_id = fields.Many2one('ostwind.rent.object.unit', 'Unit')
     description = fields.Char('Unit Name', required=True)
-    owner_partner_id = fields.Many2one('res.partners', 'Owner')
+    owner_partner_id = fields.Many2one('res.partner', 'Owner')
     part = fields.Float('Part', required=False)
 
