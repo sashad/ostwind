@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="ostwind_rent_object_kanban_view" model="ir.ui.view">
+        <field name="name">Rent object kanvan</field>
+        <field name="model">ostwind.rent.object</field>
+        <field name="arch" type="xml">
+            <kanban edit="1">
+                <field name="name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="container o_kanban_card_content" t-attf-class="oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-6 o_kanban_primary_left">
+                                    <field name="name"/>
+                                </div>
+                                <div class="col-6 o_kanban_primary_right">
+                                    field 2
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    row 2
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

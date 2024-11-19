@@ -10,6 +10,8 @@
     "data": [
         'security/rent_security.xml',
         'security/ir.model.access.csv',
+        'views/rent_object_kanban.xml',
+        'views/rent_object_form.xml',
         "views/rent_object_views.xml",
         # "data/contract_cron.xml",
     ],

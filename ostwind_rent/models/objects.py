@@ -34,8 +34,8 @@ class RentObject(models.Model):
     entry_number = fields.Char('Entry number', required=False, translate=False)
     coownership = fields.Integer('Co-ownership', required=False)
     # Heating value
-    hiating_requirement = fields.Float('Heating requirement', required=False)
-    hiating_type = fields.Selection(
+    heating_requirement = fields.Float('Heating requirement', required=False)
+    heating_type = fields.Selection(
         string='Heating type',
         selection=[
             ('c', 'Central'),
@@ -85,6 +85,8 @@ class RentObject(models.Model):
     active = fields.Boolean('Active', default=True)
     sequence = fields.Integer('Sequence', default=1000)
 
+    units = fields.Many2many("ostwind.rent.object.unit", string="Units")
+
 
 class RentObjectUnit(models.Model):
     _name = "ostwind.rent.object.unit"
@@ -95,6 +97,7 @@ class RentObjectUnit(models.Model):
     value = fields.Float('value', required=False)
 
     tenant = fields.Many2one('res.partner', 'Tenant', readonly=False)
+    owners = fields.Many2many("ostwind.rent.object.unit.owner", string="Owners")
 
 
 class RentObjectUnitOwners(models.Model):
