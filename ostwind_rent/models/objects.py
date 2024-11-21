@@ -85,27 +85,39 @@ class RentObject(models.Model):
     active = fields.Boolean('Active', default=True)
     sequence = fields.Integer('Sequence', default=1000)
 
-    units = fields.Many2many("ostwind.rent.object.unit", string="Units")
+    units = fields.One2many(
+        "ostwind.rent.object.unit",
+        inverse_name='rent_object_id',
+        string="Units"
+    )
 
 
 class RentObjectUnit(models.Model):
     _name = "ostwind.rent.object.unit"
     _description = "Units/flats of an rent object."
 
-    rent_object_id = fields.Many2one('ostwind.rent.object', readonly=False)
+    rent_object_id = fields.Many2one('ostwind.rent.object', 'Property', readonly=False)
     name = fields.Char('Unit Name', required=True, translate=True)
     value = fields.Float('value', required=False)
 
     tenant = fields.Many2one('res.partner', 'Tenant', readonly=False)
-    owners = fields.Many2many("ostwind.rent.object.unit.owner", string="Owners")
+    owners = fields.One2many(
+        "ostwind.rent.object.unit.owner",
+        inverse_name='rent_object_unit_id',
+        string="Owners"
+    )
 
 
 class RentObjectUnitOwners(models.Model):
     _name = "ostwind.rent.object.unit.owner"
     _description = "Owners of Units/flats of a rent object."
 
-    rent_object_unit_id = fields.Many2one('ostwind.rent.object.unit', 'Unit', readonly=False)
-    description = fields.Char('Unit Name', required=True)
-    owner_partner_id = fields.Many2one('res.partner', 'Owner', readonly=False)
+    rent_object_unit_id = fields.Many2one(
+        'ostwind.rent.object.unit',
+        'Unit',
+        readonly=False
+    )
+    description = fields.Char('Description', required=True)
+    owner = fields.Many2one('res.partner', 'Owner', readonly=False)
     part = fields.Float('Part', required=False)
 
