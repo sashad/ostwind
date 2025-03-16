@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <record id="ostwind_delete_owner_action" model="ir.actions.act_window">
+        <field name="name">delete owner</field>
+        <field name="res_model">ostwind.rent.object.unit.owner</field>
+    </record>
+
     <record id="ostwind_rent_object_form_view" model="ir.ui.view">
         <field name="name">Rent property</field>
         <field name="model">ostwind.rent.object</field>
@@ -57,12 +62,20 @@
                                                         <field name="part"/>
                                                     </group>
                                                 </form>
-                                                <tree>
+                                                <tree delete="1">
                                                     <field name="description"/>
                                                     <field name="owner"/>
                                                     <field name="part"/>
+                                                    <!-- <button -->
+                                                    <!--     name="%(ostwind_delete_owner_action)d" -->
+                                                    <!--     class="btn-success" -->
+                                                    <!--     style="width: 50px;" -->
+                                                    <!--     string="Delete" -->
+                                                    <!--     context="{'del_owner': 1}" -->
+                                                    <!--     type="action" -->
+                                                    <!-- /> -->
                                                     <control>
-                                                        <create name="add_owner_control" string="Add a owner"/>
+                                                        <create name="add_owner_control" string="Add a owner" context="{'add_owner': 1}"/>
                                                     </control>
                                                 </tree>
                                             </field>

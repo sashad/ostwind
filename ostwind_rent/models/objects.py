@@ -1,5 +1,10 @@
-from odoo import fields, models
+import logging
 
+from odoo.exceptions import ValidationError
+
+from odoo import api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 class RentObject(models.Model):
     _name = "ostwind.rent.object"
@@ -112,6 +117,8 @@ class RentObjectUnitOwners(models.Model):
     _name = "ostwind.rent.object.unit.owner"
     _description = "Owners of Units/flats of a rent object."
 
+    _part_sum = 0
+
     rent_object_unit_id = fields.Many2one(
         'ostwind.rent.object.unit',
         'Unit',
@@ -119,5 +126,60 @@ class RentObjectUnitOwners(models.Model):
     )
     description = fields.Char('Description', required=True)
     owner = fields.Many2one('res.partner', 'Owner', readonly=False)
-    part = fields.Float('Part', required=False)
+    part = fields.Float('Part', required=False, readonly=False)
+
+    # @api.model
+    # @api.depends('rent_object_unit_id')
+    @api.onchange('part', 'rent_object_unit_id')
+    def change_value(self):
+        _logger.info(f"--- onchange : {self.rent_object_unit_id._origin.id=} {self.part=} {self._part_sum=} {self.env.context=}")
+        _logger.info(f"--- env : {dir(self.env)}")
+        if not self.rent_object_unit_id._origin.id :
+            return
+
+        RentObjectUnitOwners._part_sum += self.part
+        owners = self.env[self._name].search([
+            ('rent_object_unit_id', '=', self.rent_object_unit_id._origin.id)
+        ])
+        rest = 100.0
+        for owner in owners:
+            # _logger.info(f"{rest=} {self._origin.id=} {owner.id=}")
+            if owner.id == self._origin.id:
+                continue
+            rest -= owner.part
+            _logger.info(f"--- owner : {owner=}")
+            _logger.info(f"--- rest : {rest=}")
+        if self.part > rest or rest <= 0:
+            self.part = 0
+            raise ValidationError("Sum all parts must be not more 100!")
+            return {
+                'warning': {
+                    'title': 'Error!',
+                    'message': 'Sum all parts must be not more 100!'
+                }
+            }
+        if self.env.context.get('add_owner'):
+            self.part = rest
+
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'soft_reload'
+        }
+
+
+
+    @api.ondelete(at_uninstall=False)
+    def delete_owner(self):
+        _logger.info(f"------- delete : {self.env.context=}")
+
+
+    @api.model
+    @api.depends('rent_object_unit_id')
+    def default_get(self, fields):
+        res = super().default_get(fields)
+        #        _logger.info(f"------- unit_id : {fields=} {self.env.context=} {self.rent_object_unit_id.id=}")
+        _logger.info(f"------- unit_id : {res=} {self._name=}")
+        return {
+            'part': -10
+        }
 
