@@ -112,6 +112,12 @@ class RentObjectUnit(models.Model):
         string="Owners"
     )
 
+    @api.model
+    @api.onchange('owners')
+    def change_value(self):
+        # _logger.info(f"--- onchange : {self.rent_object_unit_id=} {self.owner=} {self.part=} {self._part_sum=}")
+        _logger.info(f"+++ onchange : {self.owners=} {self.env.context=}")
+
 
 class RentObjectUnitOwners(models.Model):
     _name = "ostwind.rent.object.unit.owner"
@@ -128,12 +134,18 @@ class RentObjectUnitOwners(models.Model):
     owner = fields.Many2one('res.partner', 'Owner', readonly=False)
     part = fields.Float('Part', required=False, readonly=False)
 
-    # @api.model
-    # @api.depends('rent_object_unit_id')
-    @api.onchange('part', 'rent_object_unit_id')
+    @api.model
+    #@api.depends('part')
+    # если указать несколько параметров, то будет вызываться столько же раз !!!
+    @api.onchange('part')
     def change_value(self):
-        _logger.info(f"--- onchange : {self.rent_object_unit_id._origin.id=} {self.part=} {self._part_sum=} {self.env.context=}")
-        _logger.info(f"--- env : {dir(self.env)}")
+        # _logger.info(f"--- onchange : {self.rent_object_unit_id=} {self.owner=} {self.part=} {self._part_sum=}")
+        _logger.info(f"--- onchange : {self.part=} {self._part_sum=} {self.env.context=}")
+        if self.env.context.get('del_object'):
+            RentObjectUnitOwners._part_sum -= (self.part or 0)
+            return
+
+        # _logger.info(f"--- env : {dir(self.env)}")
         if not self.rent_object_unit_id._origin.id :
             return
 
@@ -141,7 +153,7 @@ class RentObjectUnitOwners(models.Model):
         owners = self.env[self._name].search([
             ('rent_object_unit_id', '=', self.rent_object_unit_id._origin.id)
         ])
-        rest = 100.0
+        rest = 100.0 
         for owner in owners:
             # _logger.info(f"{rest=} {self._origin.id=} {owner.id=}")
             if owner.id == self._origin.id:
@@ -159,7 +171,7 @@ class RentObjectUnitOwners(models.Model):
                 }
             }
         if self.env.context.get('add_owner'):
-            self.part = rest
+            self.part = rest - RentObjectUnitOwners._part_sum
 
         return {
             'type': 'ir.actions.client',
@@ -173,13 +185,14 @@ class RentObjectUnitOwners(models.Model):
         _logger.info(f"------- delete : {self.env.context=}")
 
 
-    @api.model
-    @api.depends('rent_object_unit_id')
-    def default_get(self, fields):
-        res = super().default_get(fields)
-        #        _logger.info(f"------- unit_id : {fields=} {self.env.context=} {self.rent_object_unit_id.id=}")
-        _logger.info(f"------- unit_id : {res=} {self._name=}")
-        return {
-            'part': -10
-        }
-
+    # @api.model
+    # @api.depends('rent_object_unit_id')
+    # def default_get(self, fields):
+    #     res = super().default_get(fields)
+    #     #        _logger.info(f"------- unit_id : {fields=} {self.env.context=} {self.rent_object_unit_id.id=}")
+    #    _logger.info(f"------- unit_id : {res=} {self._name=} {fields=}")
+    #     return {
+    #        'part': 100 - RentObjectUnitOwners._part_sum
+    #     }
+    #     return {}
+    #
