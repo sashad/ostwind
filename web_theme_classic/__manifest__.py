@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Web Theme Classic",
+    "name": "Web Theme Classic (ostwind)",
     "summary": "Contrasted style on fields to improve the UI.",
     "version": "17.0.1.0.0",
     "author": "GRAP, Odoo Community Association (OCA)",
