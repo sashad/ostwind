@@ -1,0 +1,30 @@
+/***********************************************************
+        Variables
+************************************************************/
+
+$input-background-color-required: #d2d2ff;
+$input-color-placeholder-required: #4c4c4c;
+$input-color-required: #212529;
+
+/***********************************************************
+        Form View : Handle Background for required fields
+************************************************************/
+
+.o_form_view {
+    .o_required_modifier:not(.o_readonly_modifier) {
+        .o_input {
+            /* Add background for all editable and required fields */
+            background-color: $input-background-color-required !important;
+            color: $input-color-required !important;
+
+            /* darker placeholder as the background is darker */
+            &::placeholder {
+                color: $input-color-placeholder-required;
+            }
+        }
+        .btn {
+            color: $input-color-required !important;
+        }
+    }
+}
+

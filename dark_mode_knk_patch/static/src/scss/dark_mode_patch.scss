@@ -1,0 +1,6 @@
+
+$o-view-background-color-dark-from: #0b0b0b;
+$o-view-background-color-dark-to: #a0a0a0;
+.knk_night_mode .o_view_nocontent{
+    background-image: radial-gradient(at 50% 50%, #{$o-view-background-color-dark-from} 0px, #{rgba($o-view-background-color-dark-to, 0.5)} 100%);
+}
