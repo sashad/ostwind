@@ -15,6 +15,7 @@
     'depends': ['dark_mode_knk'],
     "assets": {
         "web.assets_backend": [
+            '/dark_mode_knk_patch/static/src/js/dark_mode_button.js',
             "/dark_mode_knk_patch/static/src/scss/dark_mode_patch.scss",
             '/dark_mode_knk_patch/static/src/xml/dark_mode_button.xml',
         ],
