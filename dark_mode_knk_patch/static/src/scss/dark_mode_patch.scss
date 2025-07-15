@@ -11,5 +11,9 @@ $o-view-background-color-dark-to: #a0a0a0;
 }
 
 .knk_night_mode .table-hover > tbody > tr:hover > * {
-    --table-accent-bg: #4a5152;
+    --table-accent-bg: #4a5152 !important;
+}
+
+.knk_night_mode .table-hover > tbody > tr.o_data_row_selected > * {
+    --table-accent-bg: #3a5152;
 }
