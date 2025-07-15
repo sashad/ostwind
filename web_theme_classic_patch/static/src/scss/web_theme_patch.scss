@@ -28,3 +28,12 @@ $input-color-required: #212529;
     }
 }
 
+.o_form_view .oe_avatar .img {
+    border: 1px solid #666;
+    border-radius: 8px;
+}
+
+.o_kanban_renderer .oe_kanban_card .o_kanban_image img,
+.o_kanban_renderer .o_kanban_record .o_kanban_image img {
+    border-radius: 8px;
+}
