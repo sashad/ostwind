@@ -35,3 +35,12 @@ $o-view-background-color-dark-to: #a0a0a0;
     width: 6px;
     height: 6px;
 }
+
+.knk_night_mode .o_kanban_card_header_title .o_primary {
+    color: #cdcdce !important;
+}
+
+.knk_night_mode .o_kanban_primary_bottom.bottom_block {
+    border-top: 1px solid #535659 !important;
+    background-color: #535659 !important;
+}
