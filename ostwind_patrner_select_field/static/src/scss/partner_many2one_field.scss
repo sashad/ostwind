@@ -1,0 +1,16 @@
+.o_field_many2one .o_field_many2one_selection a {
+    margin-left: 10px !important;
+}
+
+body:not(.o_touch_device) .o_field_many2one {
+    &:not(:hover):not(:focus-within) {
+        & div.o_input_dropdown:not(:hover) ~ a {
+            display: none !important;
+        }
+    }
+    word-break: keep-all !important;
+}
+
+.o_field_many2one_selection {
+    position: relative;
+}

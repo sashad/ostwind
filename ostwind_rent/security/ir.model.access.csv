@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_ostwind_rent_object_manager,ostwind.rent.object manager,model_ostwind_rent_object,group_ostwind_rent_manager,1,1,1,1
-access_ostwind_rent_object_unit_manager,ostwind.rent.object.unit manager,model_ostwind_rent_object_unit,group_ostwind_rent_manager,1,1,1,1
-access_ostwind_rent_object_unit_owner_manager,ostwind.rent.object.unit.owner manager,model_ostwind_rent_object_unit_owner,group_ostwind_rent_manager,1,1,1,1
-access_ostwind_rent_object_other,ostwind.rent.object other,model_ostwind_rent_object,base.group_user,1,0,0,0
-access_ostwind_rent_object_unit_other,ostwind.rent.object.unit other,model_ostwind_rent_object_unit,base.group_user,1,0,0,0
-access_ostwind_rent_object_unit_owner_other,ostwind.rent.object.unit.owner other,model_ostwind_rent_object_unit_owner,base.group_user,1,0,0,0

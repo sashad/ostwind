@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="ostwind_patrner_select_field.SendMailButton">
+        <a
+            t-att-title="title"
+            t-att-href="emailHref"
+            t-on-click.prevent.stop="onClick"
+            class="ms-3 d-inline-flex align-items-center"
+        >
+            <i
+                class="fa fa-envelope"
+                data-tooltip="Send Email"
+                aria-label="Send Email"
+                title=""
+            ></i>
+        </a>
+    </t>
+
+</templates>
