@@ -7,7 +7,7 @@
     "website": "https://www.ostwind.biz/",
     "depends": [
         "base",
-        "website",
+        "sms",
     ],
     "development_status": "Development/Unstable",
     "assets": {
