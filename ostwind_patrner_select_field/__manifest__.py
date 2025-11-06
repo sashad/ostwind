@@ -10,6 +10,9 @@
         "sms",
     ],
     "development_status": "Development/Unstable",
+    'images': [
+        'static/description/banner.png'
+    ],
     "assets": {
         'web.assets_backend': [
             'ostwind_patrner_select_field/static/src/scss/partner_many2one_field.scss',
