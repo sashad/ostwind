@@ -1,19 +1,18 @@
 /** @odoo-module **/
 
-import { registry } from "@web/core/registry";
 import { Many2OneField, many2OneField } from "@web/views/fields/many2one/many2one_field";
-import { Many2XAutocomplete } from "@web/views/fields/relational_utils";
 import { SendSMSButton } from '@sms/components/sms_button/sms_button';
-import { Component, onWillStart, useState, status } from "@odoo/owl";
+import { onWillStart, useState, status } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { SendMailButton } from '../mail/mail';
+import { patch } from "@web/core/utils/patch";
 
 const RES_MODEL = "res.partner";
 const NUMBER_FIELD_NAME = "phone";
 
 class PartnerSendSMSButton extends SendSMSButton {
     setup() {
-        super.setup();
+        super.setup(...arguments);
     }
 
     async onClick() {
@@ -51,9 +50,16 @@ class PartnerSendSMSButton extends SendSMSButton {
     }
 }
 
-class PartnerMany2OneField extends Many2OneField {
+patch(Many2OneField.prototype, {
+    template: "ostwind_personal_pbx.PartnerMany2OneField",
+    components: {
+        ...Many2OneField.components,
+        PartnerSendSMSButton: PartnerSendSMSButton,
+        SendMailButton: SendMailButton,
+    },
     setup() {
-        super.setup();
+        super.setup(...arguments);
+
         this.partner = useState({
             phone: null,
             email: null,
@@ -61,24 +67,24 @@ class PartnerMany2OneField extends Many2OneField {
 
         this.orm = useService("orm");
         onWillStart(this.fetchPartner.bind(this));
-    }
+    },
 
     get isPartnerModel() {
         return this.relation === "res.partner";
-    }
+    },
 
     get hasPhone() {
         return !!this.partner.phone;
-    }
+    },
 
     get hasEmail() {
         return !!this.partner.email;
-    }
+    },
 
     async updateRecord(value) {
         await this.fetchPartner();
         return super.updateRecord(value);
-    }
+    },
 
     async fetchPartner() {
         const partnerId = this.props.record.data[this.props.name][0];
@@ -94,14 +100,4 @@ class PartnerMany2OneField extends Many2OneField {
             }
         }
     }
-}
-PartnerMany2OneField.components = {
-    Many2XAutocomplete,
-    PartnerSendSMSButton,
-    SendMailButton,
-};
-PartnerMany2OneField.template = "ostwind_personal_pbx.PartnerMany2OneField";
-
-registry.category("fields").remove("many2one");
-many2OneField.component = PartnerMany2OneField;
-registry.category("fields").add("many2one", many2OneField);
+});
