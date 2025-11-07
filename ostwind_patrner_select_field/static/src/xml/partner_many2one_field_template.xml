@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates xml:space="preserve">
-    <t t-name="ostwind_personal_pbx.PartnerMany2OneField" t-inherit="web.Many2OneField" t-inherit-mode="primary">
+    <t t-name="ostwind_personal_pbx.PartnerMany2OneField" t-inherit="web.Many2OneField" t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('o_field_many2one_selection')]" position="inside">
             <t t-if="isPartnerModel">
                 <a t-if="hasPhone" class="o_phone_form_link d-inline-flex align-items-center" t-att-href="'tel:' + partner.phone">
                     <i class="fa fa-phone"></i>
                     <small class="fw-bold ms-1">Call</small>
                 </a>
-                <PartnerSendSMSButton t-if="hasPhone" t-props="props" />
+                <t t-component="components.PartnerSendSMSButton" t-if="hasPhone" t-props="props" />
             </t>
             <t t-if="isPartnerModel">
-                <SendMailButton t-if="hasEmail" t-props="props" />
+                <t t-component="components.SendMailButton" t-if="hasEmail" t-props="props" />
             </t>
         </xpath>
 
