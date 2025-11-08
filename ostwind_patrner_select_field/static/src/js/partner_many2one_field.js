@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { Many2OneField, many2OneField } from "@web/views/fields/many2one/many2one_field";
+import { Many2OneField } from "@web/views/fields/many2one/many2one_field";
 import { SendSMSButton } from '@sms/components/sms_button/sms_button';
 import { onWillStart, useState, status } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
