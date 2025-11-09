@@ -5,9 +5,9 @@
     "name": "Web Theme Classic Patch from Ostwind",
     "summary": "Contrasted style on fields to improve the UI (patch).",
     "version": "17.0.1.0.0",
-    "author": "Odoo Community Association (OCA), Ostwind Software",
+    "author": "Ostwind Software",
     "maintainers": ["legalsylvain"],
-    "website": "https://github.com/sashad/web-theme-patch",
+    "website": "https://github.com/sashad/ostwind",
     "license": "AGPL-3",
     "category": "Extra Tools",
     "depends": [
@@ -16,9 +16,9 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "/web_theme_classic_patch/static/src/scss/web_theme_patch.scss",
+            "/patch_web_theme_classic/static/src/scss/web_theme_patch.scss",
         ],
     },
     "installable": True,
-    "application": True,
+    "application": False,
 }
