@@ -5,6 +5,12 @@ __pycache__/
 /.pytest_cache
 /.ruff_cache
 
+# we have to download on build stage
+/vendor/OCA
+
+# neovim session
+Session.vim
+
 # C extensions
 *.so
 
@@ -26,7 +32,7 @@ var/
 *.eggs
 
 # Debian packages
-*.deb
+#*.deb
 
 # Redhat packages
 *.rpm
@@ -82,3 +88,5 @@ docs/_build/
 
 # OCA rules
 !static/lib/
+
+.aider*
