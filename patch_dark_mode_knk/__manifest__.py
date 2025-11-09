@@ -8,18 +8,18 @@
     'description': """
        Dark Mode is an extension that helps you quickly turn the screen (browser) to dark in Odoo. This dark mode backend theme gives you a fully modified view with a full-screen display. It is a perfect choice for your Odoo Backend and an attractive theme for Odoo.
     """,
-    'author': 'Kanak Infosystems LLP, Ostwind Software',
+    'author': 'Ostwind Software',
     'license': 'OPL-1',
-    'website': 'https://github.com/sashad/dark-mode-patch',
+    'website': 'https://github.com/sashad/ostwind',
     "category": "Extra Tools",
     'depends': ['dark_mode_knk'],
     "assets": {
         "web.assets_backend": [
-            '/dark_mode_knk_patch/static/src/js/dark_mode_button.js',
-            "/dark_mode_knk_patch/static/src/scss/dark_mode_patch.scss",
-            '/dark_mode_knk_patch/static/src/xml/dark_mode_button.xml',
+            '/patch_dark_mode_knk/static/src/js/dark_mode_button.js',
+            "/patch_dark_mode_knk/static/src/scss/dark_mode_patch.scss",
+            '/patch_dark_mode_knk/static/src/xml/dark_mode_button.xml',
         ],
     },
     "installable": True,
-    "application": True,
+    "application": False,
 }
