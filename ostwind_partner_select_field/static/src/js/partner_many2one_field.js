@@ -51,7 +51,7 @@ class PartnerSendSMSButton extends SendSMSButton {
 }
 
 patch(Many2OneField.prototype, {
-    template: "ostwind_personal_pbx.PartnerMany2OneField",
+    template: "ostwind_partner_select_field.PartnerMany2OneField",
     components: {
         ...Many2OneField.components,
         PartnerSendSMSButton: PartnerSendSMSButton,
@@ -61,6 +61,8 @@ patch(Many2OneField.prototype, {
         super.setup(...arguments);
 
         this.partner = useState({
+            id: null,
+            name: null,
             phone: null,
             email: null,
         });
@@ -81,10 +83,14 @@ patch(Many2OneField.prototype, {
         return !!this.partner.email;
     },
 
-    async updateRecord(value) {
-        await this.fetchPartner();
-        return super.updateRecord(value);
+    async onPhoneClick(e) {
     },
+
+    async updateRecord(value) {
+        const result = await super.updateRecord(value);
+        await this.fetchPartner();
+        return result;
+   },
 
     async fetchPartner() {
         const partnerId = this.props.record.data[this.props.name][0];
@@ -95,6 +101,8 @@ patch(Many2OneField.prototype, {
                 ["email", "phone", "mobile"]
             );
             if (partnerData.length) {
+                this.partner.id = partnerId;
+                this.partner.name = this.props.record.data[this.props.name][1];
                 this.partner.phone = partnerData[0].mobile || partnerData[0].phone;
                 this.partner.email = partnerData[0].email;
             }
