@@ -8,7 +8,7 @@ import { _t } from "@web/core/l10n/translation";
 const RES_MODEL = "res.partner";
 
 export class SendMailButton extends Component {
-    static template = "ostwind_patrner_select_field.SendMailButton";
+    static template = "ostwind_partner_select_field.SendMailButton";
 
     setup() {
         super.setup();

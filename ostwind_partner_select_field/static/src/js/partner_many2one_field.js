@@ -51,7 +51,7 @@ class PartnerSendSMSButton extends SendSMSButton {
 }
 
 patch(Many2OneField.prototype, {
-    template: "ostwind_personal_pbx.PartnerMany2OneField",
+    template: "ostwind_partner_select_field.PartnerMany2OneField",
     components: {
         ...Many2OneField.components,
         PartnerSendSMSButton: PartnerSendSMSButton,
@@ -79,6 +79,9 @@ patch(Many2OneField.prototype, {
 
     get hasEmail() {
         return !!this.partner.email;
+    },
+
+    async onPhoneClick(e) {
     },
 
     async updateRecord(value) {
