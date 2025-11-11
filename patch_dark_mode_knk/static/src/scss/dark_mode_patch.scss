@@ -52,3 +52,7 @@ $o-view-background-color-dark-to: #a0a0a0;
 .knk_night_mode .o_form_view .o_form_uri > span:hover {
     color: #ffffff !important;
 }
+
+.knk_night_mode .o_form_view .o_required_modifier:not(.o_readonly_modifier) .btn {
+    color: #cdcdce !important;
+}
