@@ -15,11 +15,11 @@
     ],
     "assets": {
         'web.assets_backend': [
-            'ostwind_patrner_select_field/static/src/scss/partner_many2one_field.scss',
-            'ostwind_patrner_select_field/static/src/mail/mail_template.xml',
-            'ostwind_patrner_select_field/static/src/mail/mail.js',
-            'ostwind_patrner_select_field/static/src/xml/partner_many2one_field_template.xml',
-            'ostwind_patrner_select_field/static/src/js/partner_many2one_field.js',
+            'ostwind_partner_select_field/static/src/scss/partner_many2one_field.scss',
+            'ostwind_partner_select_field/static/src/mail/mail_template.xml',
+            'ostwind_partner_select_field/static/src/mail/mail.js',
+            'ostwind_partner_select_field/static/src/xml/partner_many2one_field_template.xml',
+            'ostwind_partner_select_field/static/src/js/partner_many2one_field.js',
         ],
     },
     "installable": True,
