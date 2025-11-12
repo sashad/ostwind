@@ -3,7 +3,12 @@
     <t t-name="ostwind_partner_select_field.PartnerMany2OneField" t-inherit="web.Many2OneField" t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('o_field_many2one_selection')]" position="inside">
             <t t-if="isPartnerModel">
-                <a t-if="hasPhone" class="o_phone_form_link d-inline-flex align-items-center" t-att-href="'tel:' + partner.phone">
+                <a
+                    t-if="hasPhone"
+                    class="o_phone_form_link d-inline-flex align-items-center"
+                    t-att-href="'tel:' + partner.phone"
+                    t-on-click="onPhoneClick"
+                >
                     <i class="fa fa-phone"></i>
                     <small class="fw-bold ms-1">Call</small>
                 </a>
@@ -13,6 +18,5 @@
                 <t t-component="components.SendMailButton" t-if="hasEmail" t-props="props" />
             </t>
         </xpath>
-
     </t>
 </templates>

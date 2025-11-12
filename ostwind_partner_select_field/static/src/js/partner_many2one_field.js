@@ -81,6 +81,9 @@ patch(Many2OneField.prototype, {
         return !!this.partner.email;
     },
 
+    async onPhoneClick(e) {
+    },
+
     async updateRecord(value) {
         await this.fetchPartner();
         return super.updateRecord(value);
