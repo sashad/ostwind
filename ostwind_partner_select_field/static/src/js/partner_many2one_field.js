@@ -85,9 +85,10 @@ patch(Many2OneField.prototype, {
     },
 
     async updateRecord(value) {
+        const result = await super.updateRecord(value);
         await this.fetchPartner();
-        return super.updateRecord(value);
-    },
+        return result;
+   },
 
     async fetchPartner() {
         const partnerId = this.props.record.data[this.props.name][0];
