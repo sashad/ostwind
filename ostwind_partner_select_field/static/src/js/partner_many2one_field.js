@@ -8,9 +8,9 @@ import { SendMailButton } from '../mail/mail';
 import { patch } from "@web/core/utils/patch";
 
 const RES_MODEL = "res.partner";
-const NUMBER_FIELD_NAME = "phone";
+const NUMBER_FIELD_NAME = "mobile";
 
-class PartnerSendSMSButton extends SendSMSButton {
+export class PartnerSendSMSButton extends SendSMSButton {
     setup() {
         super.setup(...arguments);
     }
@@ -20,7 +20,7 @@ class PartnerSendSMSButton extends SendSMSButton {
         if (this.props.record.data[this.props.name].length) {
             res_id = this.props.record.data[this.props.name][0];
         }
-        this.action.doAction(
+        return await this.action.doAction(
             {
                 type: "ir.actions.act_window",
                 target: "new",
@@ -37,9 +37,6 @@ class PartnerSendSMSButton extends SendSMSButton {
             },
             {
                 onClose: () => {
-                    if (status(this) === "destroyed") {
-                        return;
-                    }
                 },
             }
         );
@@ -61,6 +58,8 @@ patch(Many2OneField.prototype, {
         super.setup(...arguments);
 
         this.partner = useState({
+            id: null,
+            name: null,
             phone: null,
             email: null,
         });
@@ -99,6 +98,8 @@ patch(Many2OneField.prototype, {
                 ["email", "phone", "mobile"]
             );
             if (partnerData.length) {
+                this.partner.id = partnerId;
+                this.partner.name = this.props.record.data[this.props.name][1];
                 this.partner.phone = partnerData[0].mobile || partnerData[0].phone;
                 this.partner.email = partnerData[0].email;
             }
