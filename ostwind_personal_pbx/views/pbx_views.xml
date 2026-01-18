@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="model_ostwind_personalpbx" model="ir.model">
+        <field name="name">ostwind.personalpbx</field>
+        <field name="model">ostwind.personalpbx</field>
+    </record>
+</odoo>

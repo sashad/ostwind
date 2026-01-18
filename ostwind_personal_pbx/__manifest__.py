@@ -19,16 +19,15 @@
             ('include', 'web._assets_core'),
             'ostwind_personal_pbx/static/src/standalone_app/**/*',
         ],
-        "web.assets_frontend": [
-        ],
         'web.assets_backend': [
             'ostwind_personal_pbx/static/src/xml/phone_field_ext.xml',
             'ostwind_personal_pbx/static/src/js/patches.js',
         ],
     },
     "data": [
-        'security/ir.model.access.csv',
+        'views/pbx_views.xml',
         'views/index_view.xml',
+        'security/ir.model.access.csv',
     ],
     "installable": True,
     'application': False,
