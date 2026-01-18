@@ -13,7 +13,7 @@ class PbxSms(models.Model):
         """ Override to block sending the original actions. """
 
         current_user = self.env.user
-        record = self.env['ostwind.personalpbx'].search(
+        record = self.env['x_ostwind.personalpbx'].search(
             [('user_id', '=', current_user.id)],
             limit=1
         )

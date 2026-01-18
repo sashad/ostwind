@@ -39,9 +39,9 @@ Personal PBX is more than just an app—it’s a smarter, more flexible way to m
 Download
 --------
 
-[**Click here to download the android mobile application**](static/src/files/odoo-peronal-pbx-release.latest.apk)
+[**Click here to download the android mobile application**](static/description/odoo-peronal-pbx-release.latest.apk)
 
-![](static/src/files/photo_2026-01-15_12-59-23.jpg) ![](static/src/files/photo_2026-01-15_12-59-31.jpg) ![](static/src/files/photo_2026-01-15_12-58-57.jpg)
+![](static/description/photo_2026-01-15_12-59-23.jpg) ![](static/description/photo_2026-01-15_12-59-31.jpg) ![](static/description/photo_2026-01-15_12-58-57.jpg)
 
 Daily Limits for the Mobile App:
 --------------------------------
