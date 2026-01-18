@@ -1,0 +1,56 @@
+.call-info {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // z-index: 1000;
+
+    .call-info-content {
+        background-color: #eaeaea;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        color: black;
+        box-shadow: 8px 8px 12px rgba(255, 255, 255, 0.7);
+
+        h2 {
+            margin-top: 0;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button.reject {
+            background-color: grey;
+            margin-left: 12px;
+        }
+
+        button.reject:hover {
+            background-color: #666666;
+        }
+    }
+
+    .call-info-content.black {
+        box-shadow: 8px 8px 12px rgba(255, 255, 255, 0.7);
+    }
+
+    .call-info-content.white {
+        box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.5);
+    }
+}

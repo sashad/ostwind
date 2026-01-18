@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ostwind_personal_pbx.CallInfo">
+        <div class="call-info" t-if="isShow" t-ref="call-info">
+            <div t-att-class="callInfoClass">
+                <h2>Outgoing Call</h2>
+                <p><t t-esc="state.userName"/></p>
+                <p><t t-esc="state.phoneNumber"/></p>
+                <button t-on-click="acceptCall">Accept</button>
+                <button t-on-click="rejectCall" class="reject">Reject</button>
+            </div>
+        </div>
+    </t>
+</templates>

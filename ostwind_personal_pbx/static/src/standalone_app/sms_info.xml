@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ostwind_personal_pbx.SmsInfo">
+        <div class="call-info" t-if="isShow" t-ref="sms-info">
+            <div t-att-class="smsInfoClass">
+                <h2>Outgoing SMS</h2>
+                <p><t t-esc="state.phoneNumber"/></p>
+                <pre><t t-esc="state.message"/></pre>
+                <button t-on-click="acceptSms">Accept</button>
+                <button t-on-click="rejectSms" class="reject">Reject</button>
+            </div>
+        </div>
+    </t>
+</templates>

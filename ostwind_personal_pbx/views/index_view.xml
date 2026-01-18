@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <odoo> -->
+<!--     <template id="index_page_template" name="Index Page"> -->
+<!--         <!-1- <!DOCTYPE html> -1-> -->
+<!--         <html> -->
+<!--             <head> -->
+<!--                 <title>My Standalone Page</title> -->
+<!--                 <style> -->
+<!--                     body { -->
+<!--                         background-color: black; -->
+<!--                         color: white; -->
+<!--                     } -->
+<!--                 </style> -->
+<!--                 <script type="module" src="/web/js/owl.js"></script> -->
+<!--                 <script type="module" src="/ostwind_personal_pbx/static/src/js/auth.js"></script> -->
+<!--                 <script type="module" src="/ostwind_personal_pbx/static/src/js/long-poll.js"></script> -->
+<!--                 <script type="module" src="/ostwind_personal_pbx/static/src/js/app.js"></script> -->
+<!--             </head> -->
+<!--             <body> -->
+<!--                 <div id="js_app_container"> -->
+<!--                     <!-1- Your content here -1-> -->
+<!--                 </div> -->
+<!--             </body> -->
+<!--         </html> -->
+<!--     </template> -->
+<!-- </odoo> -->
+
+<odoo>
+    <template id="ostwind_personal_pbx.index_page_template">&lt;!DOCTYPE html&gt;
+        <html>
+            <head>
+                <script type="text/javascript">
+                    var odoo = {
+                        csrf_token: '<t t-nocache="The csrf token must always be up to date." t-esc="request.csrf_token(None)"/>',
+                        debug: '<t t-out="debug"/>',
+                        __session_info__: '<t t-esc="json.dumps(session_info)"/>',
+                    };
+                </script>
+                <t t-call-assets="ostwind_personal_pbx.assets_standalone_app" />
+            </head>
+            <body/>
+        </html>
+    </template>
+</odoo>
