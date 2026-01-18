@@ -10,6 +10,9 @@
         "ostwind_partner_select_field",
     ],
     "development_status": "Development/Unstable",
+    'images': [
+        'static/description/banner.png'
+    ],
     "assets": {
         'ostwind_personal_pbx.assets_standalone_app': [
             ('include', 'web._assets_helpers'),
