@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 
 
 class PersonalPBX(models.Model):
-    _name = 'ostwind.personalpbx'
+    _name = 'x_ostwind.personalpbx'
     _description = 'Personal PBX mobile device model'
     _transient_max_days = 7
 
