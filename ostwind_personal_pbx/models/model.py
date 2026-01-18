@@ -10,7 +10,7 @@ from ..lib.mobile import Status
 _logger = logging.getLogger(__name__)
 
 
-class PersonalPBX(models.TransientModel):
+class PersonalPBX(models.Model):
     _name = 'ostwind.personalpbx'
     _description = 'Personal PBX mobile device model'
     _transient_max_days = 7
