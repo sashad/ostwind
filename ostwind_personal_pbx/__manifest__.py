@@ -1,6 +1,6 @@
 {
     "name": "Personal PBX",
-    "version": "17.0.0.0.1",
+    "version": "17.0.0.1.0",
     "category": "Ostwind software",
     "license": "AGPL-3",
     "author": "Aleksandr Demidov <alex.m.demidoff@gmail.com>",

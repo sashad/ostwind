@@ -1,6 +1,6 @@
 {
     "name": "A PBX extension for the partner select field.",
-    "version": "17.0.0.0.1",
+    "version": "17.0.0.1.0",
     "category": "Ostwind software",
     "license": "GPL-3",
     "author": "Aleksandr Demidov <alex.m.demidoff@gmail.com>",
