@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 
 
 class PersonalPBX(models.Model):
-    _name = 'x_ostwind.personalpbx'
+    _name = 'ostwind.personalpbx'
     _description = 'Personal PBX mobile device model'
     _transient_max_days = 7
 
@@ -76,11 +76,9 @@ class PersonalPBX(models.Model):
                     or (record.status != record._origin.status):
                 record.data_updated = fields.Datetime.now()
 
-    @api.model
     def _retrieve_api_key(self, key):
         return self.browse(self._retrieve_api_key_id(key))
 
-    @api.model
     def _retrieve_api_key_id(self, key):
         for api_key in self.search([]):
             if api_key.key and consteq(key, api_key.key):

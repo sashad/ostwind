@@ -21,7 +21,7 @@ Why Choose Personal PBX?
 How It Works
 ------------
 
-1.  **Install the App:** Download Personal PBX from the Google Play Store or follow the link below and link it to your Odoo system.
+1.  **Install the App:** Download Personal PBX from the "Module Info" page of the installed odoo module.
 2.  **Make Calls & Send SMS:** Use your mobile device to handle all business communication, fully integrated with Odoo.
 
 Who Is It For?
