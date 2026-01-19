@@ -151,7 +151,6 @@ patch(Chatter.prototype, {
 
 patch(PartnerSendSMSButton.prototype, {
     async onClick() {
-        const ret = await super.onClick();
-        const config = this.props.record.model.config;
+        await super.onClick();
     }
 });
