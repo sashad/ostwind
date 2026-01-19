@@ -11,7 +11,7 @@ import { PartnerSendSMSButton } from '@ostwind_partner_select_field/js/partner_m
 
 const isAvailable = async function() {
     this.pbx.isAvailable = await this.orm.call(
-        'x_ostwind.personalpbx',
+        'ostwind.personalpbx',
         'is_available'
     );
 };
@@ -48,7 +48,7 @@ patch(PhoneField.prototype, {
 
             const { resModel, resId } = this.props.record.config;
             const result = await this.orm.call(
-                'x_ostwind.personalpbx',
+                'ostwind.personalpbx',
                 'partner_call',
                 [
                     this.props.record.data[this.props.name].replace(/\s+/g, ''),
@@ -100,7 +100,7 @@ patch(Many2OneField.prototype, {
 
             const { resModel, resId } = this.props.record.config;
             const result = await this.orm.call(
-                'x_ostwind.personalpbx',
+                'ostwind.personalpbx',
                 'partner_call',
                 [this.partner.phone, resModel, resId],
                 this.partner
@@ -153,6 +153,5 @@ patch(PartnerSendSMSButton.prototype, {
     async onClick() {
         const ret = await super.onClick();
         const config = this.props.record.model.config;
-        console.log('!!!', ret, config.resModel, config.resId);
     }
 });
