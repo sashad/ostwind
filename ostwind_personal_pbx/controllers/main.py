@@ -71,7 +71,7 @@ class LongPollingController(http.Controller):
             'available': True
         })
         while time.time() - start_time < timeout:
-            record = request.env['x_ostwind.personalpbx'].browse(
+            record = request.env['ostwind.personalpbx'].browse(
                 request.pbx_device.id
             )
             if record and record.status == Status.CREATED.value:
@@ -327,7 +327,7 @@ class PbxSession(Session):
         )
         parent_result['session_id'] = request.session.sid
 
-        device_record = request.env['x_ostwind.personalpbx'].search(
+        device_record = request.env['ostwind.personalpbx'].search(
             [('user_id', '=', parent_result['uid'])], limit=1)
         if device_record:
             device_record.write({
@@ -337,7 +337,7 @@ class PbxSession(Session):
                 'key': request.session.sid
             })
         else:
-            request.env['x_ostwind.personalpbx'].create({
+            request.env['ostwind.personalpbx'].create({
                 'user_id': parent_result['uid'],
                 'key': request.session.sid,
                 'available': True
