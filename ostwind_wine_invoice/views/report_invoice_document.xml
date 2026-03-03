@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document" priority="32">
+        <xpath expr="//div[@class='page']" position="before" mode="inner">
+            <t t-set="wine_info" t-value="{}"/>
+            <t t-call="ostwind_wine_invoice.calc_wine_info">
+                <t t-set="wine_info" t-value="wine_info"/>
+                <t t-set="sale_order" t-value="doc"/>
+            </t>
+        </xpath>
+        <xpath expr="//div[@t-if='doc.date_order']" position="inside" mode="inner">
+            <div
+                t-if="wine_info.get('total_liters') and doc.validity_date and doc.state in ['draft', 'sent']"
+                class="col"
+                name="wine_production_ids"
+            >
+                <div t-if="wine_info.get('UID')" t-out="'UID: ' + wine_info.get('UID')"></div>
+                <div t-if="wine_info.get('VID')" t-out="'VID: ' + wine_info.get('VID')"></div>
+                <div t-if="wine_info.get('EORI')" t-out="'EORI: ' + wine_info.get('EORI')"></div>
+            </div>
+        </xpath>
+        <xpath expr="//t[@t-call='sale.document_tax_totals']" position="inside" mode="inner">
+            <t t-set="wine_info" t-value="wine_info"/>
+        </xpath>
+    </template>
+
+    <template id="calc_wine_info">
+        <t t-set="sale_lines" t-value="sale_order._get_order_lines_to_report()"/>
+        <t t-set="sparkling" t-value="sale_order.env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.sparkling_category')"/>
+        <t t-set="UID" t-value="sale_order.env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.uid')"/>
+        <t t-set="VID" t-value="sale_order.env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.vid')"/>
+        <t t-set="EORI" t-value="sale_order.env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.eori')"/>
+        <t t-set="none" t-value="wine_info.update({'UID': UID})"/>
+        <t t-set="none" t-value="wine_info.update({'VID': VID})"/>
+        <t t-set="none" t-value="wine_info.update({'EORI': EORI})"/>
+        <t t-set="total_liters" t-value="0"/>
+        <t t-set="total_sparkling_liters" t-value="0"/>
+
+        <t t-foreach="sale_lines" t-as="line">
+            <t t-set="unit_name" t-value="line.product_uom_id.name"/>
+            <t t-set="unit_value" t-value="0"/>
+            <t t-if="unit_name.lower().startswith('bottle')">
+                <t t-set="unit_value" t-value="line.product_uom_id.relative_factor"/>
+                <t t-set="total_liters" t-value="total_liters + line.product_uom_qty * unit_value"/>
+                <t t-set="category_name" t-value="line.product_id.categ_id.name"/>
+                <t t-set="parent_category_ids" t-value="line.product_id.categ_id.parent_path.split('/')"/>
+                <t t-set="parent_categories" t-value="[]"/>
+                <t t-foreach="parent_category_ids" t-as="category_id"> 
+                    <t t-if="category_id">
+                        <t t-set="parent_category" t-value="env['product.category'].browse(int(category_id))"/>
+                        <t t-set="parent_categories" t-value="parent_categories + [parent_category.name.lower()]"/>
+                    </t>
+                </t>
+                <t t-if="category_name == (sparkling or '').lower() or (sparkling or '').lower() in parent_categories">
+                    <t t-set="total_sparkling_liters" t-value="total_sparkling_liters + line.product_uom_qty * unit_value"/>
+                </t>
+            </t>
+        </t>
+
+        <t t-set="none" t-value="wine_info.update({'total_liters': total_liters})"/>
+        <t t-set="none" t-value="wine_info.update({'total_sparkling_liters': total_sparkling_liters})"/>
+    </template>
+
+    <template id="sale_order_portal_content" inherit_id="sale.sale_order_portal_content" priority="32">
+        <xpath expr="//div[@id='introduction']" position="after" mode="inner">
+            <t t-set="wine_info" t-value="{}"/>
+            <t t-call="ostwind_wine_invoice.calc_wine_info">
+                <t t-set="wine_info" t-value="wine_info"/>
+                <t t-set="sale_order" t-value="sale_order"/>
+            </t>
+        </xpath>
+        <xpath expr="//tbody[@id='sale_info_table']" position="inside" mode="inner">
+            <tr t-if="wine_info.get('total_liters') and wine_info.get('UID')">
+                <th class="ps-0 pb-0">UID:</th>
+                <td class="w-100 pb-0 text-wrap" t-out="wine_info['UID']">Number</td>
+            </tr>
+            <tr t-if="wine_info.get('total_liters') and wine_info.get('VID')">
+                <th class="ps-0 pb-0">VID:</th>
+                <td class="w-100 pb-0 text-wrap" t-out="wine_info['VID']">Number</td>
+            </tr>
+            <tr t-if="wine_info.get('total_liters') and wine_info.get('EORI')">
+                <th class="ps-0 pb-0">EORI:</th>
+                <td class="w-100 pb-0 text-wrap" t-out="wine_info['EORI']">Number</td>
+            </tr>
+        </xpath>
+        <xpath expr="//t[@t-call='sale.sale_order_portal_content_totals_table']" position="replace" mode="inner">
+            <t t-call="sale.sale_order_portal_content_totals_table">
+                <t t-set="wine_info" t-value="wine_info"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="sale_order_portal_content_totals_table" inherit_id="sale.sale_order_portal_content_totals_table" priority="32">
+        <xpath expr="//t[@t-call='#{sale_order._get_name_tax_totals_view()}']" position="inside" mode="inner">
+            <t t-set="wine_info" t-value="wine_info"/>
+        </xpath>
+    </template>
+
+    <template id="document_tax_totals_template" inherit_id="account.document_tax_totals_template" priority="32">
+        <xpath expr="//tr[hasclass('o_total')]" position="after" mode="inner">
+            <tr t-if="wine_info.get('total_liters')" class="o_total">
+                <td><strong>Total in Liter</strong></td>
+                <td class="text-end">
+                    <strong t-out="wine_info.get('total_liters')"
+                    >29</strong>
+                </td>
+            </tr>
+            <tr t-if="wine_info.get('total_sparkling_liters')" class="o_total">
+                <td><strong>Total in Liter Sparkling</strong></td>
+                <td class="text-end">
+                    <strong t-out="wine_info.get('total_sparkling_liters')"
+                    >_</strong>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+</odoo>
