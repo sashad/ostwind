@@ -31,7 +31,7 @@ To configure the sparkling wine category, follow these steps:
 5. Go to the **Settings** module.
 6. Navigate to the **Technical** section.
 7. Find the **System Parameters** section.
-8. Add a new parameter with the key `ostwind_wine_invoice.sparkling_category` and set its value to the ID of the sparkling wine category.
+8. Add a new parameter with the key `ostwind_wine_invoice.sparkling_category` and set its value to the Name of the sparkling wine category.
 
 ### 2. Setting Up UID, VID, and EORI
 
@@ -40,9 +40,8 @@ To configure the UID, VID, and EORI numbers, follow these steps:
 1. Go to the **Settings** module.
 2. Navigate to the **Technical** section.
 3. Find the **Parameters** section.
-4. Add a new parameter with the key `ostwind_wine_invoice.uid` and set its value to the UID number.
-5. Add a new parameter with the key `ostwind_wine_invoice.vid` and set its value to the VID number.
-6. Add a new parameter with the key `ostwind_wine_invoice.eori` and set its value to the EORI number.
+4. Add a new parameter with the key `ostwind_wine_invoice.vid` and set its value to the VID number.
+5. Add a new parameter with the key `ostwind_wine_invoice.eori` and set its value to the EORI number.
 
 ## Usage
 
