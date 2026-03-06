@@ -10,7 +10,7 @@
         </xpath>
         <xpath expr="//div[@t-if='doc.date_order']" position="inside" mode="inner">
             <div
-                t-if="wine_info.get and wine_info.get('total_liters')"
+                t-if="wine_info and wine_info.get('total_liters')"
                 class="col"
                 name="wine_production_ids"
             >
@@ -27,10 +27,21 @@
     <template id="report_invoice_document" inherit_id="account.report_invoice_document" priority="32">
         <xpath expr="//div[@class='clearfix invoice_main']" position="before" mode="inner">
             <t t-set="wine_info" t-value="{}"/>
-            <t t-call="ostwind_wine_invoice.calc_wine_info">
+            <t t-call="ostwind_wine_invoice.move_calc_wine_info">
                 <t t-set="wine_info" t-value="wine_info"/>
-                <t t-set="sale_order" t-value="o"/>
+                <t t-set="move_order" t-value="o"/>
             </t>
+        </xpath>
+        <xpath expr="//div[@id='informations']" position="inside" mode="inner">
+            <div
+                t-if="wine_info and wine_info.get('total_liters')"
+                class="col"
+                name="wine_production_ids"
+            >
+                <div t-if="wine_info.get('UID')" t-out="'UID: ' + wine_info.get('UID')"></div>
+                <div t-if="wine_info.get('VID')" t-out="'VID: ' + wine_info.get('VID')"></div>
+                <div t-if="wine_info.get('EORI')" t-out="'EORI: ' + wine_info.get('EORI')"></div>
+            </div>
         </xpath>
         <xpath expr="//t[@t-call='account.document_tax_totals']" position="inside" mode="inner">
             <t t-set="wine_info" t-value="wine_info"/>
@@ -40,10 +51,10 @@
     <template id="calc_wine_info">
         <t t-set="user_company" t-value="env.user.company_id"/>
         <t t-set="sale_lines" t-value="sale_order._get_order_lines_to_report()"/>
-        <t t-set="sparkling" t-value="sale_order.env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.sparkling_category') or 'sparkling'"/>
+        <t t-set="sparkling" t-value="env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.sparkling_category') or 'Schaumwein'"/>
         <t t-set="UID" t-value="user_company.vat or sale_order.env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.uid')"/>
-        <t t-set="VID" t-value="sale_order.env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.vid')"/>
-        <t t-set="EORI" t-value="sale_order.env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.eori')"/>
+        <t t-set="VID" t-value="env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.vid')"/>
+        <t t-set="EORI" t-value="env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.eori')"/>
         <t t-set="none" t-value="wine_info.update({'UID': UID})"/>
         <t t-set="none" t-value="wine_info.update({'VID': VID})"/>
         <t t-set="none" t-value="wine_info.update({'EORI': EORI})"/>
@@ -74,8 +85,59 @@
                         <t t-set="parent_categories" t-value="parent_categories + [parent_category.name.lower()]"/>
                     </t>
                 </t>
-                <t t-if="category_name == (sparkling or '').lower() or (sparkling or '').lower() in parent_categories">
+                <t t-if="category_name.lower() == (sparkling or '').lower() or (sparkling or '').lower() in parent_categories">
                     <t t-set="total_sparkling_liters" t-value="total_sparkling_liters + line.product_uom_qty * unit_value"/>
+                </t>
+            </t>
+        </t>
+
+        <t t-set="none" t-value="wine_info.update({'total_liters': total_liters})"/>
+        <t t-set="none" t-value="wine_info.update({'total_sparkling_liters': total_sparkling_liters})"/>
+    </template>
+
+    <template id="move_calc_wine_info">
+        <t t-set="user_company" t-value="env.user.company_id"/>
+        <t t-set="move_lines" t-value="move_order._get_move_lines_to_report()"/>
+        <t t-set="sparkling" t-value="env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.sparkling_category') or 'Schaumwein'"/>
+        <t t-set="UID" t-value="user_company.vat or sale_order.env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.uid')"/>
+        <t t-set="VID" t-value="env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.vid')"/>
+        <t t-set="EORI" t-value="env['ir.config_parameter'].sudo().get_param('ostwind_wine_invoice.eori')"/>
+        <t t-set="none" t-value="wine_info.update({'UID': UID})"/>
+        <t t-set="none" t-value="wine_info.update({'VID': VID})"/>
+        <t t-set="none" t-value="wine_info.update({'EORI': EORI})"/>
+        <t t-set="total_liters" t-value="0"/>
+        <t t-set="total_sparkling_liters" t-value="0"/>
+
+        <t t-foreach="move_lines" t-as="line">
+            <t t-set="is_product" t-value="line.display_type == 'product'"/>
+            <t t-if="is_product">
+                <t t-set="unit_name" t-value="line.product_uom_id.name.lower().replace(',', '.').split(' ')"/>
+                <t t-set="unit_value" t-value="0"/>
+
+                <t t-if="unit_name[0].startswith('bottle')">
+                    <t t-set="unit_value" t-value="line.product_uom_id.relative_factor"/>
+                    <t t-if="unit_name[-1] == 'ml' and len(unit_name) > 2">
+                        <t t-set="unit_value" t-value="float(unit_name[-2])/1000.0 if unit_name[-2].replace('.', '').isnumeric() else 0"/>
+                    </t>
+                    <t t-elif="unit_name[-1] == 'l' and len(unit_name) > 2">
+                        <t t-set="unit_value" t-value="float(unit_name[-2]) if unit_name[-2].replace('.', '').isnumeric() else 0"/>
+                    </t>
+                    <t t-elif="len(unit_name) > 1">
+                        <t t-set="unit_value" t-value="float(unit_name[-1]) if unit_name[-1].replace('.', '').isnumeric() else 0"/>
+                    </t>
+                    <t t-set="total_liters" t-value="total_liters + line.quantity * unit_value"/>
+                    <t t-set="category_name" t-value="line.product_id.categ_id.name"/>
+                    <t t-set="parent_category_ids" t-value="line.product_id.categ_id.parent_path.split('/')"/>
+                    <t t-set="parent_categories" t-value="[]"/>
+                    <t t-foreach="parent_category_ids" t-as="category_id"> 
+                        <t t-if="category_id">
+                            <t t-set="parent_category" t-value="env['product.category'].browse(int(category_id))"/>
+                            <t t-set="parent_categories" t-value="parent_categories + [parent_category.name.lower()]"/>
+                        </t>
+                    </t>
+                    <t t-if="category_name.lower() == (sparkling or '').lower() or (sparkling or '').lower() in parent_categories">
+                        <t t-set="total_sparkling_liters" t-value="total_sparkling_liters + line.quantity * unit_value"/>
+                    </t>
                 </t>
             </t>
         </t>
