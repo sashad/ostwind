@@ -24,27 +24,33 @@
         </xpath>
     </template>
 
-    <template id="report_invoice_document" inherit_id="account.report_invoice_document" priority="32">
-        <xpath expr="//div[@class='clearfix invoice_main']" position="before" mode="inner">
+    <!-- <template id="report_invoice_document" inherit_id="account.report_invoice_document" priority="32"> -->
+    <!-- </template> -->
+
+    <template id="report_invoice_document" inherit_id="l10n_din5008.report_invoice_document" priority="32">
+        <xpath expr="//t[@t-set='forced_vat']" position="before" mode="inner">
             <t t-set="wine_info" t-value="{}"/>
             <t t-call="ostwind_wine_invoice.move_calc_wine_info">
                 <t t-set="wine_info" t-value="wine_info"/>
                 <t t-set="move_order" t-value="o"/>
             </t>
         </xpath>
-        <xpath expr="//div[@id='informations']" position="inside" mode="inner">
-            <div
-                t-if="wine_info and wine_info.get('total_liters')"
-                class="col"
-                name="wine_production_ids"
-            >
-                <div t-if="wine_info.get('UID')" t-out="'UID: ' + wine_info.get('UID')"></div>
-                <div t-if="wine_info.get('VID')" t-out="'VID: ' + wine_info.get('VID')"></div>
-                <div t-if="wine_info.get('EORI')" t-out="'EORI: ' + wine_info.get('EORI')"></div>
-            </div>
-        </xpath>
         <xpath expr="//t[@t-call='account.document_tax_totals']" position="inside" mode="inner">
             <t t-set="wine_info" t-value="wine_info"/>
+        </xpath>
+        <xpath expr="//div[@class='information_block']/table//tr[@t-if='o.ref']" position="after" mode="inner">
+            <tr t-if="wine_info and wine_info.get('total_liters') and wine_info.get('UID')">
+                <td>UID</td>
+                <td><t t-out="wine_info.get('UID')"/></td>
+            </tr>
+            <tr t-if="wine_info and wine_info.get('total_liters') and wine_info.get('VID')">
+                <td>VID</td>
+                <td><t t-out="wine_info.get('VID')"/></td>
+            </tr>
+            <tr t-if="wine_info and wine_info.get('total_liters') and wine_info.get('EORI')">
+                <td>EORI</td>
+                <td><t t-out="wine_info.get('EORI')"/></td>
+            </tr>
         </xpath>
     </template>
 
