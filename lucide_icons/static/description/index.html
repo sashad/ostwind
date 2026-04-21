@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucide Icons Module</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lucide Icons Module</h1>
+    <p>This module provides a custom field type for Odoo that allows users to select icons from the Lucide icon set. The Lucide icon set is a collection of over 1,000 open-source icons that are designed to be simple, consistent, and easy to use.</p>
+
+    <h2>Features</h2>
+    <ul>
+        <li><strong>Custom Field Type</strong>: The module introduces a new field type called <code>lucide_icon</code> that can be used in Odoo models.</li>
+        <li><strong>Icon Picker</strong>: The field type includes an icon picker that allows users to browse and select icons from the Lucide icon set.</li>
+        <li><strong>Search and Pagination</strong>: The icon picker includes search functionality and pagination to make it easy to find the desired icon.</li>
+        <li><strong>Integration with Odoo</strong>: The module is designed to integrate seamlessly with Odoo, allowing users to use the Lucide icons in their custom views and models.</li>
+    </ul>
+
+    <h2>Usage</h2>
+    <p>To use the <code>lucide_icon</code> field type in your Odoo model, you can add the following code to your model definition:</p>
+    <pre><code>    lucide_icon = fields.Char(string='Lucide Icon', widget='lucide_icon')
+
+    html = f'&lt;i class="icon-{self.lucide_icon}"&gt;&lt;/i&gt;'
+    </code></pre>
+
+    <pre><code>    &lt;i
+        t-att-class="'icon-' + record.lucide_icon"
+    &gt;&lt;/i&gt;
+
+    &lt;filed name="lucide_icon" widget="lucide_icon"/&gt;
+    </code></pre>
+
+    <h2>Screencast</h2>
+    <p><img src="screencast.gif" alt="screencast"></p>
+
+    <h2>License</h2>
+    <p>This module is licensed under the LGPL-3.0 license.</p>
+</body>
+</html>
