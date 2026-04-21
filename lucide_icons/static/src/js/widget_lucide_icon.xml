@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="lucide_icons.LucideIconPicker">
+        <div class="lucide-icon-picker">
+            <div class="lucide-icon-grid">
+                <div
+                    style="width: 42px; height: 42px;"
+                    class="lucide-icon-item"
+                    t-on-click="togglePicker"
+                >
+                    <img
+                        t-if="state.value"
+                        t-att-src="'/lucide_icons/static/src/lucide-static/icons/' + state.value + '.svg'"
+                        t-att-title="state.editable ? 'Click to select ...' : ''"
+                        width="24"
+                        height="24"
+                    />
+                </div>
+                <b 
+                    t-esc="state.value"
+                    style="margin-left: 10px;"
+                />
+            </div>
+            <div
+                class="lucide-icon-grid"
+                t-if="isPickerOpen"
+                t-att-style="isPickerOpen ? 'display: block' : 'display: none'"
+                t-on-click="onIconSelected"
+            >
+                <div class="search-container">
+                    <input
+                        type="text"
+                        class="search-input o_input"
+                        placeholder="Search icons..."
+                        t-att-value="state.searchQuery"
+                        t-on-input="onSearchInput"
+                    />
+                    <div class="pagination">
+                        <button
+                            t-att-disabled="prevDisabled ? 'disabled' : ''"
+                            t-on-click="onPagePrev"
+                            style="margin-right: 10px;"
+                            class="btn btn-secondary"
+                        >
+                            &lt; prev
+                        </button>
+                        <span>Page <t t-esc="state.currentPage"/> of <t t-esc="totalPages"/></span>
+                        <button
+                            t-att-disabled="nextDisabled ? 'disabled' : ''"
+                            t-on-click="onPageNext"
+                            style="margin-left: 10px;"
+                            class="btn btn-secondary"
+                        >
+                            next &gt;
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <t t-foreach="iconList" t-as="icon" t-key="icon">
+                        <div
+                            class="lucide-icon-item"
+                        >
+                            <img
+                                t-att-src="'/lucide_icons/static/src/lucide-static/icons/' + icon + '.svg'"
+                                t-att-alt="icon"
+                                width="24"
+                                height="24"
+                            />
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
