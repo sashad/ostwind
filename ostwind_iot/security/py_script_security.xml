@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_restricted_py_script_manager" model="res.groups">
+        <field name="name">Restricted Python Script Manager</field>
+        <field name="comment">Restricted Python Script Manager permission group.</field>
+    </record>
+</odoo>

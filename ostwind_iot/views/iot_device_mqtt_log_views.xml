@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="iot_device_mqtt_log_graph_number" model="ir.ui.view">
+        <field name="name">iot.device.mqtt.log.graph</field>
+        <field name="model">iot.device.mqtt.log</field>
+        <field name="arch" type="xml">
+            <graph string="MQTT Log Graph" type="line">
+                <field name="create_date" type="row" groupby="minute"/>
+                <field name="payload_float" type="measure" widget="float"/>
+            </graph>
+        </field>
+    </record>
+    <record id="iot_device_mqtt_log_graph_string" model="ir.ui.view">
+        <field name="name">iot.device.mqtt.log.graph</field>
+        <field name="model">iot.device.mqtt.log</field>
+        <field name="arch" type="xml">
+            <graph string="MQTT Log Graph" type="bar">
+                <field name="create_date" type="row"/>
+                <field name="payload" type="measure"/>
+            </graph>
+        </field>
+    </record>
+</odoo>

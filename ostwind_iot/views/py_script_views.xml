@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_py_script_form" model="ir.ui.view">
+        <field name="name">py.script.form</field>
+        <field name="model">py.script</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="run_script"
+                            string="Run Test"
+                            type="object"
+                            class="btn-primary"
+                            context="{'test': True}"
+                        />
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="key"/>
+                        <field name="default_context" widget="ace" options="{'mode': 'json', 'theme': 'ace/theme/dark'}"/>
+                        <field name="code" widget="ace" options="{'mode': 'python', 'theme': 'ace/theme/dark'}"/>
+                        <field name="user_id" widget="many2one" options="{'no_create': True, 'no_create_edit': True}"/>
+                        <field name="py_script_group_id" widget="many2one"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_py_script_group_tree" model="ir.ui.view">
+        <field name="name">py.script.group.tree</field>
+        <field name="model">py.script.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="group_ids" widget="many2many_tags"/>
+                <field name="with_user_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_py_script_group_form" model="ir.ui.view">
+        <field name="name">py.script.group.form</field>
+        <field name="model">py.script.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="group_ids" widget="many2many_tags"/>
+                        <field name="allowed_modules"
+                            help="Python Modules List."
+                            />
+                        <field name="with_user_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_py_script_tree" model="ir.ui.view">
+        <field name="name">py.script.tree</field>
+        <field name="model">py.script</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="key"/>
+                <field name="user_id"/>
+                <field name="result_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_python_scripts" model="ir.actions.act_window">
+        <field name="name">Restricted Python Scripts</field>
+        <field name="res_model">py.script</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_python_script_groups" model="ir.actions.act_window">
+        <field name="name">Restricted Python Script Groups</field>
+        <field name="res_model">py.script.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="ostwind_iot.view_py_script_settings" model="ir.ui.view">
+        <field name="name">py.script.settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="Resticted Py-Scripts" groups="base.group_system" name="ostwind_iot">
+                    <block title="Restricted Python Script Configuration">
+                        <!-- <setting -->
+                        <!--     string="Allowed Python Modules" -->
+                        <!--     help="Define Python modules separated by a comma." -->
+                        <!-- > -->
+                        <!--     <field name="allowed_modules"/> -->
+                        <!-- </setting> -->
+                        <setting string="Python Script Groups" help="Show Python Script Groups">
+                            <button
+                                name="%(action_python_script_groups)d"
+                                string="Python Script Groups"
+                                type="action"
+                                class="oe_link"
+                                icon="fa-arrow-right"
+                            />
+                        </setting>
+                        <setting string="Python Scripts" help="Show Python Scripts">
+                            <button
+                                name="%(action_python_scripts)d"
+                                string="Python Scripts"
+                                type="action"
+                                class="oe_link"
+                                icon="fa-arrow-right"
+                            />
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem
+        id="menuitem_python_script_settings"
+        name="Restricted Py-Scripts"
+        parent="base.menu_administration"
+        sequence="10"
+    />
+    <menuitem
+        id="menuitem_python_script_groups"
+        name="Py-Groups"
+        parent="menuitem_python_script_settings"
+        action="action_python_script_groups"
+        sequence="1"
+    />
+    <menuitem
+        id="menuitem_python_scripts"
+        name="Py-Scripts"
+        parent="menuitem_python_script_settings"
+        action="action_python_scripts"
+        sequence="2"
+    />
+</odoo>
