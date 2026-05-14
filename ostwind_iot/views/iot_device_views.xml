@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="iot_device_form" model="ir.ui.view">
+        <field name="name">iot.device.form</field>
+        <field name="model">iot.device</field>
+        <field name="inherit_id" ref="iot_oca.iot_device_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_show_mqtt"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-cloud"
+                >
+                    <field style="margin-left: 4px;" string="MQTT topics" name="mqtt_count" widget="statinfo" />
+                </button>
+            </xpath>
+            <field name="communication_system_id" position="attributes">
+                <attribute name="domain">[('applies_to', '=', 'mqtt')]</attribute>
+            </field>
+            <page id="actions" position="attributes">
+                <attribute name="invisible">not communication_system_id</attribute>
+            </page>
+            <xpath expr="//notebook/page[@id='actions']" position="replace">
+                <page string="MQTT Topics" id="mqtt_topics">
+                    <field name="mqtt_ids" readonly="True">
+                        <tree>
+                            <field name="name"/>
+                            <field name="topic"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="iot_device_kanban" model="ir.ui.view">
+        <field name="name">iot.device.kanban</field>
+        <field name="model">iot.device</field>
+        <field name="inherit_id" ref="iot_oca.iot_device_kanban" />
+        <field name="priority">30</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@role='menu']/*[1]" position="before">
+                <a
+                    type="object"
+                    name="action_show_mqtt"
+                    role="menuitem"
+                    class="dropdown-item"
+                >
+                    <i class="fa fa-cloud" />
+                    MQTT topics
+                </a>
+            </xpath>
+            <xpath expr="//div[@t-if='record.ip']" position="replace">
+            </xpath>
+            <xpath expr="//div[@t-if='record.last_contact_date']" position="replace">
+            </xpath>
+            <xpath expr="//a[contains(@class, 'dropdown-toggle')]" position="attributes">
+                <attribute name="data-bs-toggle">dropdown</attribute>
+                <attribute name="data-bs-display">static</attribute>
+             </xpath>
+            <xpath expr="//templates" position="before">
+                <field name="value_ids_json"/>
+            </xpath>
+            <xpath expr="//div[contains(@class, 'oe_kanban_content')]" position="attributes">
+                <attribute name="class">o_kanban_content d-flex h-100 w-100</attribute>
+            </xpath>
+            <xpath expr="//div[contains(@class, 'o_kanban_details')]" position="inside">
+                <t t-if="record.value_ids_json.raw_value">
+                    <t t-foreach="record.value_ids_json.raw_value" t-as="v">
+                        <div class="align-space-items">
+                            <span class="align-items">
+                                <b>
+                                    <i
+                                        t-att-style="`color: ${v.color}; font-size: 20px;`"
+                                        t-att-class="`icon-${v.icon}`"
+                                    >
+                                    </i>
+                                </b>
+                                <button
+                                    t-if="v.is_logging &amp;&amp; ['numeric', 'int'].includes(v.value_type)"
+                                    name="action_show_chart"
+                                    type="object"
+                                    t-att-class="'pt-0 pb-0 btn btn-secondary'"
+                                    t-att-context="{'value':{...v}}"
+                                    help="To show a chart ..."
+                                    >
+                                    <span t-esc="v.name"></span>
+                                </button>
+                                <span t-else="" style="margin-left: 6px;" t-esc="v.name"></span>
+                            </span>
+                            <button
+                                t-if="v.setting_topic &amp;&amp; v.setting_template"
+                                name="action_on_click"
+                                type="object"
+                                t-att-context="{'value':{...v}}"
+                                t-att-class="'pt-0 pb-0 btn btn-' + (v.value ? 'primary' : 'secondary')"
+                                >
+                                <b>
+                                    <i
+                                        t-if="v.value_type == 'boolean'"
+                                        t-att-style="`color: ${v.color}; font-size: 20px;`"
+                                        t-att-class="'icon-' + (v.value ? v.icon_true : v.icon_false)"
+                                    >
+                                    </i>
+                                    <span
+                                        t-else=""
+                                        t-esc="v.last_payload"
+                                    />
+                                </b>
+                            </button>
+                            <b t-elif="v.value_type == 'boolean'">
+                                <i
+                                    t-att-style="`color: ${v.color}; font-size: 20px;`"
+                                    t-att-class="'icon-' + (v.value ? v.icon_true : v.icon_false)"
+                                >
+                                </i>
+                            </b>
+                            <b t-else="" t-esc="v.last_payload || '---'"></b>
+                        </div>
+                    </t>
+                </t>
+            </xpath>
+            <xpath expr="//div[contains(@class, 'o_kanban_details')]" position="attributes">
+                <attribute name="style">width: stretch; padding-left: 0; margin-left: 10px;</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

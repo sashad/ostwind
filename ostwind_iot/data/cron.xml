@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.cron" id="ir_cron_run_once_after_startup">
+        <field name="name">Run Once After Startup 10s delay</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_iot_mqtt_host"/>
+        <field name="state">code</field>
+        <field name="code">model._run_once_after_startup()</field>
+    </record>
+</odoo>

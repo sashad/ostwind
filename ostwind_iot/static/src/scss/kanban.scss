@@ -1,0 +1,168 @@
+// Variables
+$light-bg: #ffffff;
+$light-text: #333333;
+$light-header: #4a6fa5;
+$light-address: #555555;
+$light-label: #777777;
+$light-value: #333333;
+$light-btn-bg: #f0f4ff;
+$light-btn-hover: #e6efff;
+$light-tooltip-color: #f0f4ff;
+$light-tooltip: #555555;
+$light-shadow: rgba(0, 0, 0, 0.15);
+
+$dark-bg: #2c3e50;
+$dark-text: #ecf0f1;
+$dark-header: #34495e;
+$dark-address: #bdc3c7;
+$dark-label: #7f8c8d;
+$dark-value: #ecf0f1;
+$dark-btn-bg: #f0f4ff;
+// $dark-btn-bg: #3d566e;
+$dark-btn-hover: #e6efff;
+// $dark-btn-hover: #4a637e;
+$dark-tooltip-color: #ecf0f1;
+$dark-tooltip: #1a252f;
+$dark-shadow: rgba(0, 0, 0, 0.3);
+
+// Mixins
+@mixin theme($bg, $text, $header, $address, $label, $value, $btn-bg, $btn-hover, $tooltip, $tooltip-color, $shadow) {
+    .ows_kanban-card {
+        background-color: $bg !important;
+        color: $text;
+        box-shadow: 0 6px 12px $shadow !important;
+    }
+    .ows_card-header {
+        background-color: $header !important;
+    }
+    .ows_property-address {
+        color: $address;
+    }
+    .ows_property-address i {
+        color: $address;
+    }
+    .ows_detail-label {
+        color: $label;
+    }
+    .ows_detail-value {
+        color: $value;
+    }
+    .ows_smart-btn {
+        background-color: $btn-bg !important;
+        color: $header;
+        &:hover {
+            background-color: $btn-bg !important;
+        }
+    }
+    .ows_tooltip {
+        background: $tooltip;
+        color: $tooltip-color;
+    }
+    .ows_card-image {
+        filter: if($bg == $dark-bg, brightness(0.8), none);
+    }
+}
+
+// Base Styles
+.ows_kanban-card {
+    width: 300px;
+    border-radius: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0px !important;
+    margin: 6px;
+    position: relative;
+    .ows_card-header {
+        border-radius: 10px 10px 0 0;
+        color: white;
+        padding: 12px 15px;
+        font-weight: 600;
+        font-size: 16px;
+        position: relative;
+    }
+    .o_field_widget.ows_card-image {
+        width: 100%;
+        .d-inline-block {
+            width: 100%;
+            .img-fluid{
+                width: 100%;
+                height: 160px;
+                object-fit: cover;
+            }
+        }
+    }
+    .ows_card-body {
+        padding: 10px 15px 0px 15px;
+    }
+    .ows_property-address {
+        font-size: 14px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        min-height: 42px;
+        i {
+            margin-right: 8px;
+        }
+    }
+    .ows_property-detail {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+    .ows_smart-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+    }
+    .ows_smart-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 8px;
+        border-radius: 8px;
+        font-size: 12px;
+        cursor: pointer;
+        position: relative;
+        i {
+            margin-bottom: 4px;
+        }
+        .ows_tooltip {
+            visibility: hidden;
+            width: 100px;
+            text-align: center;
+            border-radius: 4px;
+            padding: 4px;
+            position: absolute;
+            z-index: 100;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -50px;
+            opacity: 0;
+            // transition: opacity 0.3s;
+            /* prevent tooltip from being clipped */
+            transform: translatey(-4px);
+            pointer-events: none; /* allow clicks to pass through */        }
+        &:hover .ows_tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+// Light Theme
+body:not(.knk_night_mode) {
+    @include theme(
+        $light-bg, $light-text, $light-header, $light-address,
+        $light-label, $light-value, $light-btn-bg, $light-btn-hover,
+        $light-tooltip, $light-tooltip-color, $light-shadow
+    );
+}
+
+// Dark Theme
+body.knk_night_mode {
+    @include theme(
+        $dark-bg, $dark-text, $dark-header, $dark-address,
+        $dark-label, $dark-value, $dark-btn-bg, $dark-btn-hover,
+        $dark-tooltip, $dark-tooltip-color, $dark-shadow
+    );
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="iot_mqtt_host_form_view">
+        <field name="name">iot.mqtt.host.form (in ostwind_iot)</field>
+        <field name="model">iot.mqtt.host</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <div class="oe_title" style="max-width: 100%;">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="host" placeholder="host.name.com" />
+                        <field name="protocol" />
+                        <field name="port" />
+                        <field name="login" />
+                        <field name="password" widget="password" password="True"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter" />
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="iot_mqtt_host_search_view">
+        <field name="name">iot.mqtt.host.search (in ostwind_iot)</field>
+        <field name="model">iot.mqtt.host</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="iot_mqtt_host_tree_view">
+        <field name="name">iot.mqtt.host.tree (in ostwind_iot)</field>
+        <field name="model">iot.mqtt.host</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="host" />
+                <field name="port" />
+                <field name="protocol" />
+           </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="iot_mqtt_host_act_window">
+        <field name="name">MQTT Host</field>
+        <field name="res_model">iot.mqtt.host</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <menuitem
+        name="MQTT Hosts"
+        sequence="70"
+        id="iot_mqtt_host_menu"
+        action="iot_mqtt_host_act_window"
+        parent="iot_oca.iot_configuration_menu"
+    />
+</odoo>

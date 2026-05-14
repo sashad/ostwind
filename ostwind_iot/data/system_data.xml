@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mqtt_system" model="iot.communication.system">
+        <field name="name">MQTT</field>
+        <field name="applies_to">mqtt</field>
+    </record>
+    <record id="mqtt_topic" model="iot.communication.system.action">
+        <field name="communication_system_id" ref="mqtt_system" />
+        <field name="name">mqtt</field>
+    </record>
+</odoo>

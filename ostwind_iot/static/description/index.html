@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odoo IoT Management App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #3498db;
+            padding-bottom: 5px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: monospace;
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Odoo IoT Management App</h1>
+    <p>This Odoo app is designed to manage IoT (Internet of Things) devices, particularly those that communicate via MQTT (Message Queuing Telemetry Transport). The app provides a platform for automating tasks and processing data from IoT devices, with a focus on security and flexibility.</p>
+
+    <h2>Key Features</h2>
+
+    <h3>IoT Device Management</h3>
+    <ul>
+        <li>Models for managing IoT devices, including MQTT devices.</li>
+        <li>Support for device values, topics, and communication systems.</li>
+        <li>Kanban view integration for visualizing device values.</li>
+    </ul>
+
+    <h3>MQTT Communication</h3>
+    <ul>
+        <li>Models for MQTT hosts, topics, and values.</li>
+        <li>Support for subscribing to topics and publishing messages.</li>
+        <li>Logging of MQTT messages for debugging and monitoring.</li>
+    </ul>
+
+    <h3>Python Scripting</h3>
+    <ul>
+        <li>A restricted Python scripting environment for automating tasks and processing data.</li>
+        <li>Support for running scripts on specific events or triggers.</li>
+        <li>Access control and security features to restrict script execution.</li>
+    </ul>
+
+    <h3>Redis Integration (not implemented yet)</h3>
+    <ul>
+        <li>Integration with Redis for caching and message brokering.</li>
+        <li>Singleton pattern for managing Redis connections.</li>
+    </ul>
+
+    <h3>User Interface</h3>
+    <ul>
+        <li>Custom views for managing IoT devices, MQTT topics, and Python scripts.</li>
+        <li>Kanban views for visualizing device values.</li>
+        <li>Forms for configuring device settings and running scripts.</li>
+    </ul>
+
+    <h3>Security</h3>
+    <ul>
+        <li>Access control for Python scripts based on user groups.</li>
+        <li>Restricted Python environment to prevent malicious code execution.</li>
+    </ul>
+
+    <h3>Data Models</h3>
+    <ul>
+        <li>Models for IoT devices, MQTT topics, values, and communication systems.</li>
+        <li>Support for different value types (numeric, integer, boolean, string).</li>
+        <li>Logging of device values for historical data analysis.</li>
+    </ul>
+
+    <h3>Customization</h3>
+    <ul>
+        <li>Support for custom icons and colors for device values.</li>
+        <li>Templates for formatting MQTT messages.</li>
+        <li>Hooks for running Python scripts on specific events.</li>
+    </ul>
+
+    <h2>Getting Started</h2>
+    <p>To get started with the Odoo IoT Management App, follow these steps:</p>
+    <ol>
+        <li>Install the app in your Odoo environment.</li>
+        <li>Configure your IoT devices and MQTT hosts.</li>
+        <li>Set up Python scripts for automating tasks and processing data.</li>
+        <li>Customize the app as needed for your specific use case.</li>
+    </ol>
+
+    <h2>Screens</h2>
+    <p>
+        <img src="Screenshot_1.png" width="80%" height="80%" />
+        <img src="Screenshot_2.png" width="80%" height="80%" />
+    </p>
+
+    <h2>Contributing</h2>
+    <p>Contributions to the Odoo IoT Management App are welcome. Please follow the standard Odoo contribution guidelines and submit your pull requests to the project repository.</p>
+
+    <h2>License</h2>
+    <p>The Odoo IoT Management App is released under the <a href="LICENSE">AGPL-3.0 license</a>.</p>
+</body>
+</html>

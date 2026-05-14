@@ -1,0 +1,45 @@
+$coner-radius: 4px;
+$square-size: 24px;
+$bg-orange-color: orange;
+$bg-yellow-color: yellow;
+$bg-green-color: green;
+$bg-black-color: black;
+$text-color: white;
+
+.row-container {
+  display: flex;       // Aligns children in a row
+  flex-direction: row; // Default, but good to be explicit
+  align-items: center;      // Vertically centers its children
+  gap: 10px;           // Adds space between the squares
+}
+
+.char-square {
+  width: $square-size;
+  height: $square-size;
+  border-radius: $coner-radius;
+  
+  // Center the "m"
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  // Font adjustment for small scale
+  color: $text-color;
+  font-size: 16px; // Scaled to fit 20px
+  // font-family: sans-serif;
+  font-weight: bold;
+  line-height: 1;
+  text-transform: uppercase;
+  &.orange {
+    background-color: $bg-orange-color;
+  }
+  &.yellow {
+    background-color: $bg-yellow-color;
+  }
+  &.green {
+    background-color: $bg-green-color;
+  }
+  &.black {
+    background-color: $bg-black-color;
+  }
+}

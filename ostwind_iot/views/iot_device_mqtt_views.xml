@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="iot_device_mqtt_tree" model="ir.ui.view">
+        <field name="name">iot.device.mqtt.tree</field>
+        <field name="model">iot.device.mqtt</field>
+        <field name="arch" type="xml">
+            <tree delete="0">
+                <field name="name" />
+                <field name="topic" />
+                <field name="mqtt_host_id" />
+            </tree>
+        </field>
+    </record>
+    <record id="iot_device_mqtt_form" model="ir.ui.view">
+        <field name="name">iot.device.mqtt.form</field>
+        <field name="model">iot.device.mqtt</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="mqtt_host_id" widget="many2one"/>
+                            <field name="topic" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Scalar Values">
+                            <field name="value_ids">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="value_type" />
+                                    <field name="show_in_kanban" />
+                                    <field name="icon" widget="lucide_icon"/>
+                                    <field name="order" />
+                                    <field name="active" />
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group col="2">
+                                            <field name="name" />
+                                            <group col="1">
+                                                <field name="json_payload"
+                                                    help="To get from a JSON structure."
+                                                />
+                                                <field name="json_value_template"
+                                                    string="JSON template"
+                                                    invisible="not json_payload"
+                                                    help="JSON value template to get a value from a JSON structure.
+                                                    Example: "
+                                                />
+                                                <field name="value_type" />
+                                                <field name="show_in_kanban" />
+                                                <field name="order" />
+                                                <field name="is_logging" />
+                                            </group>
+                                            <group col="1">
+                                                <group invisible="value_type != 'numeric'">
+                                                    <field name="numeric_decimal_places"/>
+                                                </group>
+                                                <group col="2" string="Value ranges" invisible="value_type not in ['numeric', 'int']">
+                                                    <group><field name="value_low"/></group>
+                                                    <group><field name="value_midle"/></group>
+                                                </group>
+                                                <group col="3" string="Colors for a value" invisible="value_type not in ['numeric', 'int']">
+                                                    <group><field name="color_low" widget="color_picker"/></group>
+                                                    <group><field name="color_midle" widget="color_picker"/></group>
+                                                    <group><field name="color_high" widget="color_picker"/></group>
+                                                </group>
+                                                <group invisible="value_type != 'boolean'">
+                                                    <field name="boolean_true"/>
+                                                    <field name="boolean_false"/>
+                                                    <field name="icon_true" widget="lucide_icon"/>
+                                                    <field name="icon_false" widget="lucide_icon"/>
+                                                    <field name="color_true" widget="color_picker"/>
+                                                </group>
+                                                <group>
+                                                    <field
+                                                        string="Default color"
+                                                        name="color_default"
+                                                        widget="color_picker"
+                                                        help="Color of a boolean value true"
+                                                        />
+                                                </group>
+                                            </group>
+                                           <group colspan="2">
+                                                <field name="icon" widget="lucide_icon"/>
+                                                <field name="setting_topic"/>
+                                                <field name="setting_template" help="A Python formating string with '{}'."/>
+                                                <field name="hook_py_script" widget="many2one"/>
+                                                <field string="Active" name="active"/>
+                                            </group>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="iot_device_mqtt_topic">
+        <field name="name">IoT Mqtt topics</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">iot.device.mqtt</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="iot_device_mqtt_set_value_form" model="ir.ui.view">
+        <field name="name">iot.device.mqtt.set_value.form</field>
+        <field name="model">iot.device.mqtt.value</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <group>
+                        <field name="setting_value"/>
+                    </group>
+                    <group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

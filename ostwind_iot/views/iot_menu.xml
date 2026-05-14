@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem
+        id="iot_menu_py_script"
+        name="Python Scripts"
+        parent="iot_oca.iot_root_menu"
+        sequence="40"
+        action="iot_user_py_script_action"
+        groups="iot_oca.group_iot_user"
+        />
+</odoo>

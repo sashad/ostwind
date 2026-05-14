@@ -1,0 +1,18 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ostwind_iot_device_manager,ostwind.iot.device manager,model_iot_device,iot_oca.group_iot_manager,1,1,1,1
+access_ostwind_iot_device_mqtt_manager,ostwind.iot.device.mqtt manager,model_iot_device_mqtt,iot_oca.group_iot_manager,1,1,1,1
+access_ostwind_iot_device_mqtt_value_manager,ostwind.iot.device.mqtt.value manager,model_iot_device_mqtt_value,iot_oca.group_iot_manager,1,1,1,1
+access_ostwind_iot_device_mqtt_log_manager,ostwind.iot.device.mqtt.log manager,model_iot_device_mqtt_log,iot_oca.group_iot_manager,1,1,1,1
+access_ostwind_iot_mqtt_host_manager,ostwind.iot.mqtt.host manager,model_iot_mqtt_host,iot_oca.group_iot_manager,1,1,1,1
+access_ostwind_iot_device_mqtt_user,ostwind.iot.device.mqtt user,model_iot_device_mqtt,iot_oca.group_iot_user,1,0,0,0
+access_ostwind_iot_device_mqtt_value_user,ostwind.iot.device.mqtt.value user,model_iot_device_mqtt_value,iot_oca.group_iot_user,1,0,0,0
+access_ostwind_iot_device_mqtt_log_user,ostwind.iot.device.mqtt.log user,model_iot_device_mqtt_log,iot_oca.group_iot_user,1,0,0,0
+access_ostwind_iot_mqtt_host_user,ostwind.iot.mqtt.host user,model_iot_mqtt_host,iot_oca.group_iot_user,1,0,0,0
+access_ostwind_iot_communication_system_user,ostwind.iot.communication.system user,model_iot_communication_system,iot_oca.group_iot_user,1,0,0,0
+access_ostwind_iot_communication_system_manager,ostwind.iot.communication.system manager,model_iot_communication_system,iot_oca.group_iot_manager,1,0,0,0
+
+access_ostwind_py_script_manager,ostwind.py.script manager,model_py_script,group_restricted_py_script_manager,1,1,1,1
+access_ostwind_py_script_user,ostwind.py.script user,model_py_script,base.group_user,1,0,0,0
+access_ostwind_py_script_result_user,ostwind.py.script.result user,model_py_script_result,base.group_user,1,1,1,1
+access_py_script_group_manager,py.script.group manager,model_py_script_group,group_restricted_py_script_manager,1,1,1,1
+access_py_script_group_user,py.script.group user,model_py_script_group,base.group_user,1,0,0,0
