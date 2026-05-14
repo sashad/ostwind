@@ -1,5 +1,5 @@
 {
-    "name": "IoT MQTT Managment System",
+    "name": "IoT MQTT Management System",
     "version": "17.0.0.0.1",
     "category": "Ostwind software",
     "license": "AGPL-3",
