@@ -1,5 +1,5 @@
 {
-    "name": "IoT MQTT Management System",
+    "name": "IoT MQTT Managment System",
     "version": "17.0.0.0.1",
     "category": "Ostwind software",
     "license": "AGPL-3",
@@ -19,6 +19,7 @@
         "data/system_data.xml",
         "views/iot_device_views.xml",
         "views/iot_device_mqtt_views.xml",
+        "views/iot_device_mqtt_value_views.xml",
         "views/iot_device_mqtt_log_views.xml",
         "views/iot_py_script_views.xml",
         "views/iot_menu.xml",

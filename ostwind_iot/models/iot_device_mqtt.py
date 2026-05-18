@@ -7,9 +7,7 @@ class IoTDeviceMqtt(models.Model):
 
     name = fields.Char(required=True)
     key = fields.Char(required=True, help="An Unique String of a Topic.")
-    device_id = fields.Many2one(
-        "iot.device", required=True, readonly=True, auto_join=True
-    )
+    device_id = fields.Many2one("iot.device", required=True)
     mqtt_host_id = fields.Many2one("iot.mqtt.host", required=True)
     topic = fields.Char(required=True)
     json_payload = fields.Json()

@@ -4,4 +4,9 @@
         <field name="name">Restricted Python Script Manager</field>
         <field name="comment">Restricted Python Script Manager permission group.</field>
     </record>
+
+    <!-- Assign the group to the admin user -->
+    <record id="base.user_admin" model="res.users">
+        <field name="groups_id" eval="[(4, ref('group_restricted_py_script_manager'))]"/>
+    </record>    
 </odoo>

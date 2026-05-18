@@ -7,6 +7,7 @@
             <tree delete="0">
                 <field name="name" />
                 <field name="topic" />
+                <field name="device_id" />
                 <field name="mqtt_host_id" />
             </tree>
         </field>

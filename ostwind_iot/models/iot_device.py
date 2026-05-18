@@ -92,7 +92,7 @@ class IoTDevice(models.Model):
             "default_device_id": self.id,
         }
         result["domain"] = "[('device_id', '=', " + str(self.id) + ")]"
-        if len(self.output_ids) == 1:
+        if len(self.mqtt_ids) == 1:
             result["views"] = [(False, "form")]
             result["res_id"] = self.mqtt_ids.id
         return result

@@ -24,9 +24,7 @@ class IotDeviceMqttValue(models.Model):
     # iot_device_id = fields.Many2one(
     #     "iot.device", required=True, readonly=True, auto_join=True
     # )
-    iot_device_mqtt_id = fields.Many2one(
-        "iot.device.mqtt", required=True, readonly=True, auto_join=True
-    )
+    iot_device_mqtt_id = fields.Many2one("iot.device.mqtt", required=True)
 
     json_payload = fields.Boolean('JSON payload', default=False)
     json_value_template = fields.Char(required=False)
