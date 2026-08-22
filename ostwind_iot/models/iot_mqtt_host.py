@@ -8,6 +8,7 @@ import aiomqtt
 
 from odoo import SUPERUSER_ID, api, fields, models, registry
 from odoo.tools import config
+from odoo.addons.bus.models.bus import dispatch
 
 from .parser import get_value_by_template
 
@@ -170,12 +171,18 @@ class IotMqttHost(models.Model):
     @classmethod
     def _trigger_kanban_item_refresh(cls, env, res_id):
         """Fire a bus event to the Iot Device Kanban."""
-        env['bus.bus']._sendone(
-                'iot_mqtt_values_refresh',
-                'refresh_item',
-                {
-                    'res_id': res_id,  # res_id of "iot.device"
-                })
+        bus = env['bus.bus']
+        channel = (env.cr.dbname, 'iot_mqtt_values_refresh')
+        # Format: (db, channel)
+
+        # Check if any WebSocket is subscribed to this channel
+        if dispatch._channels_to_ws.get(channel):
+            bus._sendone(
+                    'iot_mqtt_values_refresh',
+                    'refresh_item',
+                    {
+                        'res_id': res_id,  # res_id of "iot.device"
+                    })
 
     @classmethod
     def publish(cls, host_id, topic, payload):
