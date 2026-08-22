@@ -52,6 +52,33 @@
                 <td><t t-out="wine_info.get('EORI')"/></td>
             </tr>
         </xpath>
+        <xpath expr="//div[@class='footer']" position="inside" mode="inner">
+            <div class="row">
+                <div class="col">
+                    <div>Seller Name</div>
+                    <div>Phone</div>
+                    <div>Email</div>
+                    <div>Website</div>
+                </div>
+                <div class="col">
+                    <div t-out="o.company_id.name"/>
+                    <div t-out="o.company_id.phone"/>
+                    <div t-out="o.company_id.email"/>
+                    <div t-out="o.company_id.website"/>
+                </div>
+                <div class="col">
+                    <div t-if="wine_info.get('UID')" t-out="'UID: ' + wine_info.get('UID')"></div>
+                    <div t-if="wine_info.get('VID')" t-out="'VID: ' + wine_info.get('VID')"></div>
+                    <div t-if="wine_info.get('EORI')" t-out="'EORI: ' + wine_info.get('EORI')"></div>
+                </div>
+                <div class="col">
+                    <div>Bank Account Owner</div>
+                    <div>IBAN</div>
+                    <div>BIC</div>
+                    <div>Bank Name</div>
+                </div>
+            </div>
+        </xpath>
     </template>
 
     <template id="calc_wine_info">
