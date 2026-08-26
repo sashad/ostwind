@@ -45,8 +45,7 @@ class PyScript(models.Model):
     )
 
     @api.model
-    def _search(self, domain, offset=0, limit=None, order=None,
-                access_rights_uid=None):
+    def _search(self, domain, offset=0, limit=None, order=None):
         # Check if our custom context key is present
         if self.env.context.get('apply_script_filter'):
             # Call your function to get the ID list
@@ -54,8 +53,7 @@ class PyScript(models.Model):
             # Append the ID filter to the existing domain
             domain += [('id', 'in', allowed_ids)]
         return super()._search(domain, offset=offset,
-                                   limit=limit, order=order,
-                                   access_rights_uid=access_rights_uid)
+                                   limit=limit, order=order)
 
     def _get_allowed_ids(self):
         self.env.cr.execute("""

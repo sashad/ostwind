@@ -100,6 +100,11 @@ class IotMqttHost(models.Model):
         """Async function to connect
         to the MQTT broker and subscribe to topics."""
         _logger.info(f"MQTT config: {mqtt_config}")
+        # Returns the worker number (0, 1, 2, ...) or False if single-process
+        worker_number = config.get('worker_number', False)
+        if worker_number:
+            _logger.info(f"Worker number: {worler_number}")
+            return None
         try:
             async with aiomqtt.Client(**mqtt_config) as client:
                 cls._mqtt_client[host.id] = client
@@ -107,6 +112,7 @@ class IotMqttHost(models.Model):
                 async for message in client.messages:
                     cls._process_mqtt_message(host, message.topic,
                                               message.payload.decode())
+                _logger.info(f"Worker number: {worler_number}, MQTT client is subscribed.")
         except Exception as e:
             _logger.info(f"MQTT error: {e}. Reconnecting in 10 seconds...")
             await asyncio.sleep(10)

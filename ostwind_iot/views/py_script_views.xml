@@ -28,15 +28,15 @@
         </field>
     </record>
 
-    <record id="view_py_script_group_tree" model="ir.ui.view">
-        <field name="name">py.script.group.tree</field>
+    <record id="view_py_script_group_list" model="ir.ui.view">
+        <field name="name">py.script.group.list</field>
         <field name="model">py.script.group</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="group_ids" widget="many2many_tags"/>
                 <field name="with_user_id"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -59,29 +59,29 @@
         </field>
     </record>
 
-    <record id="view_py_script_tree" model="ir.ui.view">
-        <field name="name">py.script.tree</field>
+    <record id="view_py_script_list" model="ir.ui.view">
+        <field name="name">py.script.list</field>
         <field name="model">py.script</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="key"/>
                 <field name="user_id"/>
                 <field name="result_id"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_python_scripts" model="ir.actions.act_window">
         <field name="name">Restricted Python Scripts</field>
         <field name="res_model">py.script</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="action_python_script_groups" model="ir.actions.act_window">
         <field name="name">Restricted Python Script Groups</field>
         <field name="res_model">py.script.group</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="ostwind_iot.view_py_script_settings" model="ir.ui.view">

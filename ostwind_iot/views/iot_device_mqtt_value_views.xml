@@ -4,34 +4,36 @@
         <field name="name">iot.device.mqtt.value.tree</field>
         <field name="model">iot.device.mqtt.value</field>
         <field name="arch" type="xml">
-            <tree delete="0">
-                <field name="name" string="Name" />
-                <field name="key" string="Key" />
-                <field name="iot_device_mqtt_id" string="Iot Device Mqtt Id" />
-                <field name="json_payload" string="Json_Payload" />
-                <field name="json_value_template" string="Json Value Template" />
-                <field name="value_type" string="Value Type" />
-                <field name="numeric_decimal_places" string="Numeric Decimal Places" />
-                <field name="boolean_true" string="Boolean True" />
-                <field name="boolean_false" string="Boolean False" />
-                <field name="show_in_kanban" string="Show In Kanban" />
-                <field name="order" string="Order" />
-                <field name="last_payload" string="Last Payload" />
-                <field name="value_low" string="Value Low" />
-                <field name="value_midle" string="Value Midle"/>
-                <field name="color_low" string="Color Low" />
-                <field name="color_midle" string="Color Midle"/>
-                <field name="color_high" string="Color High" />
-                <field name="color_true" string="Color True" />
-                <field name="color_default" string="Color Default" />
-                <field name="icon" string="Icon" />
-                <field name="icon_true" string="Icon True" />
-                <field name="icon_false" string="Icon False" />
-                <field name="setting_help" string="Setting Help" />
-                <field name="setting_topic" string="Setting Topic" />
-                <field name="setting_template" string="Setting Template" />
-                <field name="setting_value" string="Setting Value" />
-            </tree>
+            <form>
+                <tree delete="0">
+                    <field name="name" string="Name" />
+                    <field name="key" string="Key" />
+                    <field name="iot_device_mqtt_id" string="Iot Device Mqtt Id" />
+                    <field name="json_payload" string="Json_Payload" />
+                    <field name="json_value_template" string="Json Value Template" />
+                    <field name="value_type" string="Value Type" />
+                    <field name="numeric_decimal_places" string="Numeric Decimal Places" />
+                    <field name="boolean_true" string="Boolean True" />
+                    <field name="boolean_false" string="Boolean False" />
+                    <field name="show_in_kanban" string="Show In Kanban" />
+                    <field name="order" string="Order" />
+                    <field name="last_payload" string="Last Payload" />
+                    <field name="value_low" string="Value Low" />
+                    <field name="value_midle" string="Value Midle"/>
+                    <field name="color_low" string="Color Low" />
+                    <field name="color_midle" string="Color Midle"/>
+                    <field name="color_high" string="Color High" />
+                    <field name="color_true" string="Color True" />
+                    <field name="color_default" string="Color Default" />
+                    <field name="icon" string="Icon" />
+                    <field name="icon_true" string="Icon True" />
+                    <field name="icon_false" string="Icon False" />
+                    <field name="setting_help" string="Setting Help" />
+                    <field name="setting_topic" string="Setting Topic" />
+                    <field name="setting_template" string="Setting Template" />
+                    <field name="setting_value" string="Setting Value" />
+                </tree>
+            </form>
         </field>
     </record>
 </odoo>

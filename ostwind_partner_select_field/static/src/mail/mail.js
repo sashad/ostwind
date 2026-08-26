@@ -4,6 +4,7 @@ import { registry } from "@web/core/registry";
 import { Component, status } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { _t } from "@web/core/l10n/translation";
+import { session } from "@web/session";
 
 const RES_MODEL = "res.partner";
 
@@ -13,7 +14,7 @@ export class SendMailButton extends Component {
     setup() {
         super.setup();
         this.action = useService("action");
-        this.user = useService("user");
+        this.user = {context: session.context || session.bundle_params || {}};
         this.title = _t("Send Email");
     }
 

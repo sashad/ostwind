@@ -6,6 +6,7 @@ import { onWillStart, useState, status } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { SendMailButton } from '../mail/mail';
 import { patch } from "@web/core/utils/patch";
+import { session } from "@web/session";
 
 const RES_MODEL = "res.partner";
 const NUMBER_FIELD_NAME = "mobile";
@@ -13,6 +14,7 @@ const NUMBER_FIELD_NAME = "mobile";
 export class PartnerSendSMSButton extends SendSMSButton {
     setup() {
         super.setup(...arguments);
+        this.user = {context: session.context || session.bundle_params || {}};
     }
 
     async onClick() {

@@ -1,4 +1,4 @@
-- this project is an odoo 17 community version application.
+- this project is an odoo 18 OCA community version application.
 - use tabulation width 4 spaces in js files.
 - use ES6 JS syntax in js files.
 - use PEP 8 – Style Guide for Python Code.

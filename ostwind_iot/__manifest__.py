@@ -1,7 +1,7 @@
 {
     "name": "IoT MQTT Managment System",
-    "version": "17.0.0.0.1",
-    "category": "Ostwind software",
+    "version": "18.0.0.0.1",
+    "category": "IoT",
     "license": "AGPL-3",
     "author": "Aleksandr Demidov <alex.m.demidoff@gmail.com>",
     "website": "https://ostwind.biz/",

@@ -24,10 +24,12 @@
             <xpath expr="//notebook/page[@id='actions']" position="replace">
                 <page string="MQTT Topics" id="mqtt_topics">
                     <field name="mqtt_ids" readonly="True">
-                        <tree>
-                            <field name="name"/>
-                            <field name="topic"/>
-                        </tree>
+                        <form>
+                            <tree>
+                                <field name="name"/>
+                                <field name="topic"/>
+                            </tree>
+                        </form>
                     </field>
                 </page>
             </xpath>

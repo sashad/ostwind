@@ -35,22 +35,22 @@
             </search>
         </field>
     </record>
-    <record model="ir.ui.view" id="iot_mqtt_host_tree_view">
-        <field name="name">iot.mqtt.host.tree (in ostwind_iot)</field>
+    <record model="ir.ui.view" id="iot_mqtt_host_list_view">
+        <field name="name">iot.mqtt.host.list (in ostwind_iot)</field>
         <field name="model">iot.mqtt.host</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="host" />
                 <field name="port" />
                 <field name="protocol" />
-           </tree>
+           </list>
         </field>
     </record>
     <record model="ir.actions.act_window" id="iot_mqtt_host_act_window">
         <field name="name">MQTT Host</field>
         <field name="res_model">iot.mqtt.host</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>

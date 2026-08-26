@@ -4,12 +4,14 @@
         <field name="name">iot.device.mqtt.tree</field>
         <field name="model">iot.device.mqtt</field>
         <field name="arch" type="xml">
-            <tree delete="0">
-                <field name="name" />
-                <field name="topic" />
-                <field name="device_id" />
-                <field name="mqtt_host_id" />
-            </tree>
+            <form>
+                <tree delete="0">
+                    <field name="name" />
+                    <field name="topic" />
+                    <field name="device_id" />
+                    <field name="mqtt_host_id" />
+                </tree>
+            </form>
         </field>
     </record>
     <record id="iot_device_mqtt_form" model="ir.ui.view">
@@ -34,14 +36,14 @@
                     <notebook>
                         <page string="Scalar Values">
                             <field name="value_ids">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="value_type" />
                                     <field name="show_in_kanban" />
                                     <field name="icon" widget="lucide_icon"/>
                                     <field name="order" />
                                     <field name="active" />
-                                </tree>
+                                </list>
                                 <form>
                                     <sheet>
                                         <group col="2">
