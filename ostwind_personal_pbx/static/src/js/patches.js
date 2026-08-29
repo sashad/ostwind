@@ -2,7 +2,8 @@
 /* global $ */
 import { onWillStart, useState } from '@odoo/owl';
 import { useService } from '@web/core/utils/hooks';
-import { Chatter } from '@mail/core/web/chatter';
+// import { Chatter } from '@mail/core/web/chatter';
+import { Chatter } from "@mail/chatter/web_portal/chatter";
 import { patch } from '@web/core/utils/patch';
 // import { WebClient } from "@web/webclient/webclient";
 import { PhoneField } from '@web/views/fields/phone/phone_field';
@@ -35,15 +36,15 @@ patch(PhoneField.prototype, {
     async onPhoneClick(e) {
         if (this.pbx.isAvailable && !this.pbx.isDisabled) {
             e.preventDefault();
-            const $el = $(this.__owl__.bdom.parentEl).find('.o_phone_form_link').find('small, .fa-phone');
-            console.log('onPhoneClick', $el, this);
+            // const $el = $(this.__owl__.bdom.parentEl).find('.o_phone_form_link').find('small, .fa-phone');
+            // console.log('onPhoneClick', $el, this);
             this.pbx.isDisabled = true;
-            this.pbx.originalColor = $el.css('color');
-            $el.css('color', getComputedStyle(document.body).backgroundColor);
+            // this.pbx.originalColor = $el.css('color');
+            // $el.css('color', getComputedStyle(document.body).backgroundColor);
 
             setTimeout(() => {
                 this.pbx.isDisabled = false;
-                $el.css('color', this.pbx.originalColor);
+                // $el.css('color', this.pbx.originalColor);
             }, 2000);
 
             const { resModel, resId } = this.props.record.config;
@@ -62,7 +63,7 @@ patch(PhoneField.prototype, {
                     sticky: false,
                 });
             }
-            console.log(result);
+            console.log('! On click !', this.props.record.data[this.props.name], result);
         } else if (this.pbx.isAvailable) {
             e.preventDefault();
         }
@@ -87,15 +88,15 @@ patch(Many2OneField.prototype, {
     async onPhoneClick(e) {
         if (this.pbx.isAvailable && !this.pbx.isDisabled) {
             e.preventDefault();
-            const $el = $(this.__owl__.bdom.parentEl).find('.o_phone_form_link').find('small, .fa-phone');
-            console.log('onPhoneClick', $el, this.busService);
+            // const $el = $(this.__owl__.bdom.parentEl).find('.o_phone_form_link').find('small, .fa-phone');
+            // console.log('onPhoneClick', $el, this.busService);
             this.pbx.isDisabled = true;
-            this.pbx.originalColor = $el.css('color');
-            $el.css('color', getComputedStyle(document.body).backgroundColor);
+            // this.pbx.originalColor = $el.css('color');
+            // $el.css('color', getComputedStyle(document.body).backgroundColor);
 
             setTimeout(() => {
                 this.pbx.isDisabled = false;
-                $el.css('color', this.pbx.originalColor);
+                // $el.css('color', this.pbx.originalColor);
             }, 2000);
 
             const { resModel, resId } = this.props.record.config;

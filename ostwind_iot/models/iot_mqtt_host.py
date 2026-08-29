@@ -6,14 +6,16 @@ import threading
 
 import aiomqtt
 
-from odoo import SUPERUSER_ID, api, fields, models, registry
+from odoo import SUPERUSER_ID, api, fields, models
 from odoo.tools import config
 from odoo.addons.bus.models.bus import dispatch
+from odoo.modules.registry import Registry
 
 from .parser import get_value_by_template
 
 _db_name = config.get('db_name')
-_registry = registry(_db_name)
+# _registry = registry(_db_name)
+_registry = Registry
 
 _logger = logging.getLogger(__name__)
 
@@ -28,9 +30,9 @@ class IotMqttHost(models.Model):
     _thread = {}
     _mqtt_client = {}
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    
     @api.model
     def write(self, vals):
         result = super().write(vals)
